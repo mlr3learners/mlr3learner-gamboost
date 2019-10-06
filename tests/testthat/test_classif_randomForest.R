@@ -1,8 +1,8 @@
-context("classif.randomForest")
+context("classif.gamboost")
 
 test_that("autotest", {
-  learner = LearnerClassifRandomForest$new()
-  learner$param_set$values = list(ntree = 30L, importance = "gini")
+  learner = LearnerClassifgamboost$new()
+  learner$param_set$values = list(baselearner = "btree", family="Binomial")
   expect_learner(learner)
   result = run_autotest(learner)
   expect_true(result, info = result$error)
