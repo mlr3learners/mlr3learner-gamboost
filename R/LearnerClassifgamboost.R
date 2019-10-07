@@ -43,8 +43,6 @@ LearnerClassifgamboost = R6Class("LearnerClassifgamboost", inherit = LearnerClas
       if(is.null(self$param_set$values$family)){
         self$param_set$values$family = "Binomial"
       }
-      # Argument baselearner requieres package mboost
-      suppressPackageStartupMessages(require("mboost", quietly = TRUE))
 
       pars = self$param_set$get_values(tags = "base")
       pars_boost = self$param_set$get_values(tags = "boost_control")
@@ -67,7 +65,10 @@ LearnerClassifgamboost = R6Class("LearnerClassifgamboost", inherit = LearnerClas
       }
 
       ctrl = invoke(mboost::boost_control, .args = pars_boost)
-      invoke(mboost::gamboost, formula = f, data = data, control = ctrl, .args = pars)
+
+      withr::with_package("mboost", { # baselearner argument requires attached mboost package
+        invoke(mboost::gamboost, formula = f, data = data, control = ctrl, .args = pars)
+      })
     },
 
     predict_internal = function(task) {

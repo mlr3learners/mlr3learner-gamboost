@@ -21,7 +21,8 @@ Imports:
 Suggests:
     testthat,
     rmarkdown,
-    mboost
+    mboost,
+    withr
 Remotes:
     mlr-org/mlr3,
     mlr-org/mlr3misc,
