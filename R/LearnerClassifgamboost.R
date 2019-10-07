@@ -18,7 +18,7 @@ LearnerClassifgamboost = R6Class("LearnerClassifgamboost", inherit = LearnerClas
     initialize = function() {
       ps = ParamSet$new(
         params = list(
-          ParamFct$new(id = "baselearner", default = "bbs", levels = c("bbs", "bols", "btree"), tags= c("train")),
+          ParamFct$new(id = "baselearner", default = "bbs", levels = c("bbs", "bols", "btree"), tags = c("train")),
           ParamInt$new(id = "dfbase", default = 4L, tags = c("train")),
           ParamDbl$new(id = "offset", default = NULL, special_vals = list(NULL), tags = c("train")),
           ParamFct$new(id = "family", default = c("Binomial"), levels = c("Binomial", "AdaExp", "AUC"), tags = c("train")),
@@ -39,8 +39,9 @@ LearnerClassifgamboost = R6Class("LearnerClassifgamboost", inherit = LearnerClas
     },
 
     train_internal = function(task) {
+
       # Default family in mboost::gamboost is not useable for twoclass
-      if(is.null(self$param_set$values$family)){
+      if (is.null(self$param_set$values$family)) {
         self$param_set$values$family = "Binomial"
       }
 
@@ -56,12 +57,12 @@ LearnerClassifgamboost = R6Class("LearnerClassifgamboost", inherit = LearnerClas
       }
 
       pars_gamboost$family = switch(pars_gamboost$family,
-                           Binomial = mboost::Binomial(),
-                           AdaExp = mboost::AdaExp(),
-                           AUC = mboost::AUC())
+        Binomial = mboost::Binomial(),
+        AdaExp = mboost::AdaExp(),
+        AUC = mboost::AUC())
 
       # Predicted probabilities refer to the last factor level
-      if(self$predict_type == "prob") {
+      if (self$predict_type == "prob") {
         levs = c(task$class_names[task$class_names != task$positive], task$positive)
         data[[task$target_names]] = factor(data[[task$target_names]], levs)
       }
@@ -74,10 +75,10 @@ LearnerClassifgamboost = R6Class("LearnerClassifgamboost", inherit = LearnerClas
     },
 
     predict_internal = function(task) {
-      family =self$param_set$values$family
+      family = self$param_set$values$family
       newdata = task$data(cols = task$feature_names)
 
-      if(self$predict_type == "prob" & (family == "AdaExp" | family == "AUC")) {
+      if (self$predict_type == "prob" & (family == "AdaExp" | family == "AUC")) {
         stopf("The selected family %s does not support probabilities", family)
       }
 

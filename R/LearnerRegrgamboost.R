@@ -23,7 +23,7 @@ LearnerRegrgamboost = R6Class("LearnerRegrgamboost", inherit = LearnerRegr,
           ParamDbl$new(id = "offset", default = NULL, special_vals = list(NULL), tags = c("train")),
           ParamFct$new(id = "family", default = c("Gaussian"),
             levels = c("Gaussian", "Laplace", "Huber", "Poisson", "GammaReg", "NBinomial", "Hurdle"), tags = c("train")),
-          ParamUty$new(id = "nuirange", default = c(0,100), tags = c("train")),
+          ParamUty$new(id = "nuirange", default = c(0, 100), tags = c("train")),
           ParamDbl$new(id = "d", default = NULL, special_vals = list(NULL), tags = c("train")),
           ParamInt$new(id = "mstop", default = 100, tags = c("train")),
           ParamDbl$new(id = "nu", default = 0.1, tags = c("train")),
@@ -42,8 +42,9 @@ LearnerRegrgamboost = R6Class("LearnerRegrgamboost", inherit = LearnerRegr,
     },
 
     train_internal = function(task) {
+
       # Set to default for switch
-      if(is.null(self$param_set$values$family)){
+      if (is.null(self$param_set$values$family)) {
         self$param_set$values$family = "Gaussian"
       }
 
