@@ -12,4 +12,5 @@
 
   # add the learner to the dictionary
   x$add("classif.gamboost", LearnerClassifgamboost)
+  x$add("regr.gamboost", LearnerRegrgamboost)
 } # nocov end
