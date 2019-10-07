@@ -18,13 +18,13 @@ LearnerClassifgamboost = R6Class("LearnerClassifgamboost", inherit = LearnerClas
     initialize = function() {
       ps = ParamSet$new(
         params = list(
-          ParamFct$new(id = "baselearner", default = "bbs", levels = c("bbs", "bols", "btree"), tags= c("train", "base")),
-          ParamInt$new(id = "dfbase", default = 4L, tags = c("train", "base")),
-          ParamDbl$new(id = "offset", default = NULL, special_vals = list(NULL), tags = c("train", "base")),
-          ParamFct$new(id = "family", default = c("Binomial"), levels = c("Binomial", "AdaExp", "AUC"), tags = c("train", "base")),
-          ParamInt$new(id = "mstop", default = 100, tags = c("train", "boost_control")),
-          ParamDbl$new(id = "nu", default = 0.1, tags = c("train", "boost_control")),
-          ParamFct$new(id = "risk", default = "inbag", levels = c("inbag", "oobag", "none"), tags = c("train", "boost_control"))
+          ParamFct$new(id = "baselearner", default = "bbs", levels = c("bbs", "bols", "btree"), tags= c("train")),
+          ParamInt$new(id = "dfbase", default = 4L, tags = c("train")),
+          ParamDbl$new(id = "offset", default = NULL, special_vals = list(NULL), tags = c("train")),
+          ParamFct$new(id = "family", default = c("Binomial"), levels = c("Binomial", "AdaExp", "AUC"), tags = c("train")),
+          ParamInt$new(id = "mstop", default = 100, tags = c("train")),
+          ParamDbl$new(id = "nu", default = 0.1, tags = c("train")),
+          ParamFct$new(id = "risk", default = "inbag", levels = c("inbag", "oobag", "none"), tags = c("train"))
         )
       )
 
@@ -44,16 +44,18 @@ LearnerClassifgamboost = R6Class("LearnerClassifgamboost", inherit = LearnerClas
         self$param_set$values$family = "Binomial"
       }
 
-      pars = self$param_set$get_values(tags = "base")
-      pars_boost = self$param_set$get_values(tags = "boost_control")
+      pars = self$param_set$get_values(tags = "train")
+      pars_boost = pars[which(names(pars) %in% formalArgs(mboost::boost_control))]
+      pars_gamboost = pars[which(names(pars) %in% formalArgs(mboost::gamboost))]
+
       f = task$formula()
       data = task$data()
 
       if ("weights" %in% task$properties) {
-        pars = insert_named(pars, list(weights = task$weights$weight))
+        pars_gamboost = insert_named(pars, list(weights = task$weights$weight))
       }
 
-      pars$family = switch(pars$family,
+      pars_gamboost$family = switch(pars_gamboost$family,
                            Binomial = mboost::Binomial(),
                            AdaExp = mboost::AdaExp(),
                            AUC = mboost::AUC())
@@ -67,7 +69,7 @@ LearnerClassifgamboost = R6Class("LearnerClassifgamboost", inherit = LearnerClas
       ctrl = invoke(mboost::boost_control, .args = pars_boost)
 
       withr::with_package("mboost", { # baselearner argument requires attached mboost package
-        invoke(mboost::gamboost, formula = f, data = data, control = ctrl, .args = pars)
+        invoke(mboost::gamboost, formula = f, data = data, control = ctrl, .args = pars_gamboost)
       })
     },
 
