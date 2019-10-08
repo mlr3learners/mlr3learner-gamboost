@@ -33,7 +33,7 @@ LearnerClassifgamboost = R6Class("LearnerClassifgamboost", inherit = LearnerClas
       super$initialize(
         id = "classif.gamboost",
         packages = "mboost",
-        feature_types = c("integer", "numeric", "character", "factor", "ordered"),
+        feature_types = c("integer", "numeric", "factor", "ordered"),
         predict_types = c("response", "prob"),
         param_set = ps,
         properties = c("weights", "twoclass")

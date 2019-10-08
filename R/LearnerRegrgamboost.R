@@ -34,7 +34,7 @@ LearnerRegrgamboost = R6Class("LearnerRegrgamboost", inherit = LearnerRegr,
       super$initialize(
         id = "regr.gamboost",
         packages = "mboost",
-        feature_types = c("integer", "numeric", "character", "factor", "ordered"),
+        feature_types = c("integer", "numeric", "factor", "ordered"),
         predict_types = c("response"),
         param_set = ps,
         properties = c("weights")
