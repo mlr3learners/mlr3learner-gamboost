@@ -1,7 +1,7 @@
 #' @title Boosted Generalized Additive Regression Learner
 #'
 #' @aliases mlr_learners_regr.gamboost
-#' @format [R6::R6Class] inheriting from [LearnerRegr].
+#' @format [R6::R6Class] inheriting from [mlr3::LearnerRegr].
 #'
 #' @description
 #' A [LearnerRegr] for a regression gamboost implemented in [mboost::gamboost()] in package \CRANpkg{mboost}.

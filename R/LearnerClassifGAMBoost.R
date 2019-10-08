@@ -1,7 +1,7 @@
 #' @title Boosted Generalized Additive Classification Learner
 #'
 #' @aliases mlr_learners_classif.gamboost
-#' @format [R6::R6Class] inheriting from [LearnerClassif].
+#' @format [R6::R6Class] inheriting from [mlr3::LearnerClassif].
 #'
 #' @description
 #' A [LearnerClassif] for a classification gamboost implemented in [mboost::gamboost()] in package \CRANpkg{mboost}.

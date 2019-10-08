@@ -5,7 +5,7 @@
 \alias{LearnerRegrGAMBoost}
 \alias{mlr_learners_regr.gamboost}
 \title{Boosted Generalized Additive Regression Learner}
-\format{\link[R6:R6Class]{R6::R6Class} inheriting from \link{LearnerRegr}.}
+\format{\link[R6:R6Class]{R6::R6Class} inheriting from \link[mlr3:LearnerRegr]{mlr3::LearnerRegr}.}
 \usage{
 LearnerRegrGAMBoost
 }
