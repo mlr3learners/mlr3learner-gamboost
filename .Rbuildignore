@@ -13,3 +13,4 @@
 ^pkgdown$
 ^renv$
 ^renv\.lock$
+^.Rprofile$
