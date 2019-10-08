@@ -10,7 +10,7 @@
 LearnerRegrGAMBoost
 }
 \description{
-A \link{LearnerRegr} for a regression gamboost implemented in \code{\link[mboost:gamboost]{mboost::gamboost()}} in package \CRANpkg{mboost}.
+A \link[mlr3:LearnerRegr]{mlr3::LearnerRegr} for a regression gamboost implemented in \code{\link[mboost:gamboost]{mboost::gamboost()}} in package \CRANpkg{mboost}.
 }
 \references{
 Peter Buhlmann and Bin Yu (2003)

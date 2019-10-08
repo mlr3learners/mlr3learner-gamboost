@@ -4,7 +4,7 @@
 #' @format [R6::R6Class] inheriting from [mlr3::LearnerRegr].
 #'
 #' @description
-#' A [LearnerRegr] for a regression gamboost implemented in [mboost::gamboost()] in package \CRANpkg{mboost}.
+#' A [mlr3::LearnerRegr] for a regression gamboost implemented in [mboost::gamboost()] in package \CRANpkg{mboost}.
 #'
 #' @references
 #' Peter Buhlmann and Bin Yu (2003)

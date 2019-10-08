@@ -10,7 +10,7 @@
 LearnerClassifGAMBoost
 }
 \description{
-A \link{LearnerClassif} for a classification gamboost implemented in \code{\link[mboost:gamboost]{mboost::gamboost()}} in package \CRANpkg{mboost}.
+A \link[mlr3:LearnerClassif]{mlr3::LearnerClassif} for a classification gamboost implemented in \code{\link[mboost:gamboost]{mboost::gamboost()}} in package \CRANpkg{mboost}.
 }
 \references{
 Peter Buhlmann and Bin Yu (2003)

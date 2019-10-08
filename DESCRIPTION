@@ -1,4 +1,4 @@
-Package: mlr3learnergamboost
+Package: mlr3learnermboost
 Title: gamboost learner from mboost package for mlr3
 Version: 0.1.0
 Authors@R:
