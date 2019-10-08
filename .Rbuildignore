@@ -11,3 +11,6 @@
 ^attic$
 ^docs$
 ^pkgdown$
+^renv$
+^renv\.lock$
+^.Rprofile$
