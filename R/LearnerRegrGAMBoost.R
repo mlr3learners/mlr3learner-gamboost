@@ -1,10 +1,10 @@
-#' @title Regression gamboost Learner
+#' @title Boosted Generalized Additive Regression Learner
 #'
 #' @aliases mlr_learners_regr.gamboost
 #' @format [R6::R6Class] inheriting from [LearnerRegr].
 #'
 #' @description
-#' A [LearnerRegr] for a regression gamboost implemented in mboost::gamboost()] in package \CRANpkg{mboost}.
+#' A [LearnerRegr] for a regression gamboost implemented in [mboost::gamboost()] in package \CRANpkg{mboost}.
 #'
 #' @references
 #' Peter Buhlmann and Bin Yu (2003)
@@ -13,7 +13,7 @@
 #' \url{https://doi.org/10.1198/016214503000125}
 #'
 #' @export
-LearnerRegrgamboost = R6Class("LearnerRegrgamboost", inherit = LearnerRegr,
+LearnerRegrGAMBoost = R6Class("LearnerRegrGAMBoost", inherit = LearnerRegr,
   public = list(
     initialize = function() {
       ps = ParamSet$new(

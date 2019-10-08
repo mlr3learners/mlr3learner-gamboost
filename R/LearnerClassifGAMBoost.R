@@ -1,10 +1,10 @@
-#' @title Classification gamboost Learner
+#' @title Boosted Generalized Additive Classification Learner
 #'
 #' @aliases mlr_learners_classif.gamboost
 #' @format [R6::R6Class] inheriting from [LearnerClassif].
 #'
 #' @description
-#' A [LearnerClassif] for a classification gamboost implemented in mboost::gamboost()] in package \CRANpkg{mboost}.
+#' A [LearnerClassif] for a classification gamboost implemented in [mboost::gamboost()] in package \CRANpkg{mboost}.
 #'
 #' @references
 #' Peter Buhlmann and Bin Yu (2003)
@@ -13,7 +13,7 @@
 #' \url{https://doi.org/10.1198/016214503000125}
 #'
 #' @export
-LearnerClassifgamboost = R6Class("LearnerClassifgamboost", inherit = LearnerClassif,
+LearnerClassifGAMBoost = R6Class("LearnerClassifGAMBoost", inherit = LearnerClassif,
   public = list(
     initialize = function() {
       ps = ParamSet$new(

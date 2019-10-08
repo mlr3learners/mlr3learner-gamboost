@@ -1,7 +1,7 @@
 context("classif.gamboost")
 
 test_that("autotest", {
-  learner = LearnerClassifgamboost$new()
+  learner = LearnerClassifGAMBoost$new()
   learner$param_set$values = list(baselearner = "btree", family="Binomial")
   expect_learner(learner)
   result = run_autotest(learner)
