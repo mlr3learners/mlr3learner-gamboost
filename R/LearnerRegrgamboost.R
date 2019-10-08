@@ -57,7 +57,7 @@ LearnerRegrgamboost = R6Class("LearnerRegrgamboost", inherit = LearnerRegr,
       data = task$data()
 
       if ("weights" %in% task$properties) {
-        pars_gamboost = insert_named(pars, list(weights = task$weights$weight))
+        pars_gamboost = insert_named(pars_gamboost, list(weights = task$weights$weight))
       }
 
       pars_gamboost$family = switch(pars$family,
