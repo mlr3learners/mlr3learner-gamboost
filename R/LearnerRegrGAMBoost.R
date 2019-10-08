@@ -18,16 +18,16 @@ LearnerRegrGAMBoost = R6Class("LearnerRegrGAMBoost", inherit = LearnerRegr,
     initialize = function() {
       ps = ParamSet$new(
         params = list(
-          ParamFct$new(id = "baselearner", default = "bbs", levels = c("bbs", "bols", "btree"), tags = c("train")),
-          ParamInt$new(id = "dfbase", default = 4L, tags = c("train")),
-          ParamDbl$new(id = "offset", default = NULL, special_vals = list(NULL), tags = c("train")),
+          ParamFct$new(id = "baselearner", default = "bbs", levels = c("bbs", "bols", "btree"), tags = "train"),
+          ParamInt$new(id = "dfbase", default = 4L, tags = "train"),
+          ParamDbl$new(id = "offset", default = NULL, special_vals = list(NULL), tags = "train"),
           ParamFct$new(id = "family", default = c("Gaussian"),
-            levels = c("Gaussian", "Laplace", "Huber", "Poisson", "GammaReg", "NBinomial", "Hurdle"), tags = c("train")),
-          ParamUty$new(id = "nuirange", default = c(0, 100), tags = c("train")),
-          ParamDbl$new(id = "d", default = NULL, special_vals = list(NULL), tags = c("train")),
-          ParamInt$new(id = "mstop", default = 100, tags = c("train")),
-          ParamDbl$new(id = "nu", default = 0.1, tags = c("train")),
-          ParamFct$new(id = "risk", default = "inbag", levels = c("inbag", "oobag", "none"), tags = c("train"))
+            levels = c("Gaussian", "Laplace", "Huber", "Poisson", "GammaReg", "NBinomial", "Hurdle"), tags = "train"),
+          ParamUty$new(id = "nuirange", default = c(0, 100), tags = "train"),
+          ParamDbl$new(id = "d", default = NULL, special_vals = list(NULL), tags = "train"),
+          ParamInt$new(id = "mstop", default = 100, tags = "train"),
+          ParamDbl$new(id = "nu", default = 0.1, tags = "train"),
+          ParamFct$new(id = "risk", default = "inbag", levels = c("inbag", "oobag", "none"), tags = "train")
         )
       )
 

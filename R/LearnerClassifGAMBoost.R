@@ -18,15 +18,15 @@ LearnerClassifGAMBoost = R6Class("LearnerClassifGAMBoost", inherit = LearnerClas
     initialize = function() {
       ps = ParamSet$new(
         params = list(
-          ParamFct$new(id = "baselearner", default = "bbs", levels = c("bbs", "bols", "btree"), tags = c("train")),
-          ParamInt$new(id = "dfbase", default = 4L, tags = c("train")),
-          ParamDbl$new(id = "offset", default = NULL, special_vals = list(NULL), tags = c("train")),
-          ParamFct$new(id = "family", default = c("Binomial"), levels = c("Binomial", "AdaExp", "AUC"), tags = c("train")),
+          ParamFct$new(id = "baselearner", default = "bbs", levels = c("bbs", "bols", "btree"), tags = "train"),
+          ParamInt$new(id = "dfbase", default = 4L, tags = "train"),
+          ParamDbl$new(id = "offset", default = NULL, special_vals = list(NULL), tags = "train"),
+          ParamFct$new(id = "family", default = c("Binomial"), levels = c("Binomial", "AdaExp", "AUC"), tags = "train"),
           ParamFct$new(id = "link", default = "logit", levels = c("logit", "probit"), tags = "train"), # Only for family = Binomial
           ParamFct$new(id = "type", default = "adaboost", levels = c("glm", "adaboost"), tags = "train"), # Only for family = Binomial
-          ParamInt$new(id = "mstop", default = 100, tags = c("train")),
-          ParamDbl$new(id = "nu", default = 0.1, tags = c("train")),
-          ParamFct$new(id = "risk", default = "inbag", levels = c("inbag", "oobag", "none"), tags = c("train"))
+          ParamInt$new(id = "mstop", default = 100, tags = "train"),
+          ParamDbl$new(id = "nu", default = 0.1, tags = "train"),
+          ParamFct$new(id = "risk", default = "inbag", levels = c("inbag", "oobag", "none"), tags = "train")
         )
       )
 
