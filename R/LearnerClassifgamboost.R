@@ -22,6 +22,8 @@ LearnerClassifgamboost = R6Class("LearnerClassifgamboost", inherit = LearnerClas
           ParamInt$new(id = "dfbase", default = 4L, tags = c("train")),
           ParamDbl$new(id = "offset", default = NULL, special_vals = list(NULL), tags = c("train")),
           ParamFct$new(id = "family", default = c("Binomial"), levels = c("Binomial", "AdaExp", "AUC"), tags = c("train")),
+          ParamFct$new(id = "link", default = "logit", levels = c("logit", "probit"), tags = "train"), # Only for family = Binomial
+          ParamFct$new(id = "type", default = "adaboost", levels = c("glm", "adaboost"), tags = "train"), # Only for family = Binomial
           ParamInt$new(id = "mstop", default = 100, tags = c("train")),
           ParamDbl$new(id = "nu", default = 0.1, tags = c("train")),
           ParamFct$new(id = "risk", default = "inbag", levels = c("inbag", "oobag", "none"), tags = c("train"))
@@ -48,6 +50,7 @@ LearnerClassifgamboost = R6Class("LearnerClassifgamboost", inherit = LearnerClas
       pars = self$param_set$get_values(tags = "train")
       pars_boost = pars[which(names(pars) %in% formalArgs(mboost::boost_control))]
       pars_gamboost = pars[which(names(pars) %in% formalArgs(mboost::gamboost))]
+      pars_binomial = pars[which(names(pars) %in% formalArgs(mboost::Binomial))]
 
       f = task$formula()
       data = task$data()
@@ -57,13 +60,13 @@ LearnerClassifgamboost = R6Class("LearnerClassifgamboost", inherit = LearnerClas
       }
 
       pars_gamboost$family = switch(pars_gamboost$family,
-        Binomial = mboost::Binomial(),
+        Binomial = invoke(mboost::Binomial, .args = pars_binomial),
         AdaExp = mboost::AdaExp(),
         AUC = mboost::AUC())
 
       # Predicted probabilities refer to the last factor level
       if (self$predict_type == "prob") {
-        levs = c(task$class_names[task$class_names != task$positive], task$positive)
+        levs = c(task$negative, task$positive)
         data[[task$target_names]] = factor(data[[task$target_names]], levs)
       }
 
