@@ -81,7 +81,7 @@ LearnerClassifGAMBoost = R6Class("LearnerClassifGAMBoost", inherit = LearnerClas
       family = self$param_set$values$family
       newdata = task$data(cols = task$feature_names)
 
-      if (self$predict_type == "prob" & (family == "AdaExp" | family == "AUC")) {
+      if (self$predict_type == "prob" && (family == "AdaExp" || family == "AUC")) {
         stopf("The selected family %s does not support probabilities", family)
       }
 
