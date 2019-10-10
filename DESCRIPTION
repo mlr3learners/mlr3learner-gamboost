@@ -22,7 +22,7 @@ Imports:
     withr
 Suggests:
     testthat,
-    rmarkdown,
+    rmarkdown
 Remotes:
     mlr-org/mlr3,
     mlr-org/mlr3misc,
