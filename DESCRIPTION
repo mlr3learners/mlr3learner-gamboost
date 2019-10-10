@@ -17,12 +17,12 @@ Imports:
     mlr3,
     mlr3misc,
     paradox,
-    R6
+    R6,
+    mboost,
+    withr
 Suggests:
     testthat,
     rmarkdown,
-    mboost,
-    withr
 Remotes:
     mlr-org/mlr3,
     mlr-org/mlr3misc,
