@@ -1,4 +1,4 @@
 library(testthat)
-library(mlr3learnergamboost)
+library(mlr3learner.mboost)
 
-test_check("mlr3learnergamboost")
+test_check("mlr3learner.mboost")
