@@ -47,7 +47,7 @@ LearnerClassifGLMBoost = R6Class("LearnerClassifGLMBoost", inherit = LearnerClas
 
       # Default family in mboost::glmboost is not useable for twoclass
       if (is.null(self$param_set$values$family)) {
-        self$param_set$values$family = "Binomial"
+        self$param_set$values = insert_named(self$param_set$values, list(family = "Binomial"))
       }
 
       pars = self$param_set$get_values(tags = "train")
@@ -74,10 +74,7 @@ LearnerClassifGLMBoost = R6Class("LearnerClassifGLMBoost", inherit = LearnerClas
       }
 
       ctrl = invoke(mboost::boost_control, .args = pars_boost)
-
-      withr::with_package("mboost", { # baselearner argument requires attached mboost package
-        invoke(mboost::glmboost, f, data = data, control = ctrl, .args = pars_glmboost)
-      })
+      invoke(mboost::glmboost, f, data = data, control = ctrl, .args = pars_glmboost)
     },
 
     predict_internal = function(task) {

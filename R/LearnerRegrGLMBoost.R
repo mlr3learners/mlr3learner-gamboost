@@ -71,9 +71,7 @@ LearnerRegrGLMBoost = R6Class("LearnerRegrGLMBoost", inherit = LearnerRegr,
       )
 
       ctrl = invoke(mboost::boost_control, .args = pars_boost)
-      withr::with_package("mboost", { # baselearner argument requires attached mboost package
-        invoke(mboost::glmboost, f, data = data, control = ctrl, .args = pars_glmboost)
-      })
+      invoke(mboost::glmboost, f, data = data, control = ctrl, .args = pars_glmboost)
     },
 
     predict_internal = function(task) {
