@@ -22,11 +22,7 @@ before_test: Rscript -e "tic::before_script()"
 test_script: Rscript -e "tic::script()"
 on_success: Rscript -e "try(tic::after_success(), silent = TRUE)"
 on_failure: Rscript -e "tic::after_failure()"
-before_deploy: Rscript -e "tic::before_deploy()"
-deploy_script: Rscript -e "tic::deploy()"
-after_deploy: Rscript -e "tic::after_deploy()"
 on_finish: Rscript -e "tic::after_script()"
-# Custom user code -------------------------------------------------------------
 
 # no testing on R-devel because no package binaries are available
 environment:
@@ -36,3 +32,7 @@ environment:
   id_rsa:
     secure: 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
   USE_RTOOLS: true
+
+matrix:
+  fast_finish: true
+# Custom user code -------------------------------------------------------------
