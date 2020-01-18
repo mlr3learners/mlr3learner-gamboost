@@ -1,33 +1,30 @@
 Package: mlr3learners.mboost
-Title: gamboost learner from mboost package for mlr3
+Title: gamboost learner from mboost package for 'mlr3'
 Version: 0.1.0
 Authors@R:
-    c(person(given = "Marc",
-             family = "Becker",
-             role = "cre",
-             email = "marcbecker@posteo.de")
-      )
-Description: gamboost learner from mboost package for mlr3.
+    person(given = "Marc",
+           family = "Becker",
+           role = "cre",
+           email = "marcbecker@posteo.de")
+Description: gamboost learner from mboost package for
+    mlr3.
 License: LGPL-3
+URL: https://github.com/mlr3learners/mlr3learners.mboost
 Depends:
     R (>= 3.1.0)
 Imports:
     checkmate,
     data.table,
+    mboost,
     mlr3,
     mlr3misc,
     paradox,
     R6,
-    mboost,
     withr
 Suggests:
-    testthat,
-    rmarkdown
-Remotes:
-    mlr-org/mlr3,
-    mlr-org/mlr3misc,
-    mlr-org/paradox
+    rmarkdown,
+    testthat
 Encoding: UTF-8
 NeedsCompilation: no
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2

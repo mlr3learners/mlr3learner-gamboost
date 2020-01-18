@@ -6,7 +6,15 @@
 \alias{mlr3learners.mboost-package}
 \title{mlr3learners.mboost: gamboost learner from mboost package for mlr3}
 \description{
-gamboost learner from mboost package for mlr3.
+gamboost learner from mboost package for
+    mlr3.
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/mlr3learners/mlr3learners.mboost}
+}
+
 }
 \author{
 \strong{Maintainer}: Marc Becker \email{marcbecker@posteo.de}
