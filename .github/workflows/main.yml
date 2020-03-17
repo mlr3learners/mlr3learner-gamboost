@@ -144,9 +144,6 @@ jobs:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: check
 
-      - name: Setup Debug Session
-        uses: csexton/debugger-action@master
-
       - name: "[Stage] Before Deploy"
         if: runner.os == 'Windows'
         run: |
