@@ -4,7 +4,8 @@
 #' @format [R6::R6Class] inheriting from [mlr3::LearnerClassif].
 #'
 #' @description
-#' A [mlr3::LearnerClassif] for a classification glmboost implemented in [mboost::glmboost()] in package \CRANpkg{mboost}.
+#' A [mlr3::LearnerClassif] for a classification glmboost implemented in
+#' [mboost::glmboost()] in package \CRANpkg{mboost}.
 #'
 #' @references
 #' Peter Buhlmann and Bin Yu (2003)
@@ -13,19 +14,25 @@
 #' \url{https://doi.org/10.1198/016214503000125}
 #'
 #' @export
-LearnerClassifGLMBoost = R6Class("LearnerClassifGLMBoost", inherit = LearnerClassif,
+LearnerClassifGLMBoost = R6Class("LearnerClassifGLMBoost",
+  inherit = LearnerClassif,
   public = list(
     initialize = function() {
       ps = ParamSet$new(
         params = list(
-          ParamDbl$new(id = "offset", default = NULL, special_vals = list(NULL), tags = "train"),
-          ParamFct$new(id = "family", default = c("Binomial"), levels = c("Binomial", "AdaExp", "AUC"), tags = "train"),
-          ParamFct$new(id = "link", default = "logit", levels = c("logit", "probit"), tags = "train"),
-          ParamFct$new(id = "type", default = "adaboost", levels = c("glm", "adaboost"), tags = "train"),
+          ParamDbl$new(id = "offset", default = NULL, special_vals = list(NULL),
+            tags = "train"),
+          ParamFct$new(id = "family", default = c("Binomial"),
+            levels = c("Binomial", "AdaExp", "AUC"), tags = "train"),
+          ParamFct$new(id = "link", default = "logit",
+            levels = c("logit", "probit"), tags = "train"),
+          ParamFct$new(id = "type", default = "adaboost",
+            levels = c("glm", "adaboost"), tags = "train"),
           ParamLgl$new(id = "center", default = TRUE, tags = "train"),
           ParamInt$new(id = "mstop", default = 100, tags = "train"),
           ParamDbl$new(id = "nu", default = 0.1, tags = "train"),
-          ParamFct$new(id = "risk", default = "inbag", levels = c("inbag", "oobag", "none"), tags = "train"),
+          ParamFct$new(id = "risk", default = "inbag",
+            levels = c("inbag", "oobag", "none"), tags = "train"),
           ParamUty$new(id = "oobweights", default = NULL, tags = "train")
         )
       )
@@ -47,19 +54,24 @@ LearnerClassifGLMBoost = R6Class("LearnerClassifGLMBoost", inherit = LearnerClas
 
       # Default family in mboost::glmboost is not useable for twoclass
       if (is.null(self$param_set$values$family)) {
-        self$param_set$values = insert_named(self$param_set$values, list(family = "Binomial"))
+        self$param_set$values = insert_named(self$param_set$values,
+          list(family = "Binomial"))
       }
 
       pars = self$param_set$get_values(tags = "train")
-      pars_boost = pars[which(names(pars) %in% formalArgs(mboost::boost_control))]
-      pars_glmboost = pars[which(names(pars) %in% formalArgs(mboost::gamboost))]
-      pars_binomial = pars[which(names(pars) %in% formalArgs(mboost::Binomial))]
+      pars_boost = pars[which(names(pars) %in%
+        formalArgs(mboost::boost_control))]
+      pars_glmboost = pars[which(names(pars) %in%
+        formalArgs(mboost::gamboost))]
+      pars_binomial = pars[which(names(pars) %in%
+        formalArgs(mboost::Binomial))]
 
       f = task$formula()
       data = task$data()
 
       if ("weights" %in% task$properties) {
-        pars_glmboost = insert_named(pars_glmboost, list(weights = task$weights$weight))
+        pars_glmboost = insert_named(pars_glmboost,
+          list(weights = task$weights$weight))
       }
 
       pars_glmboost$family = switch(pars_glmboost$family,
@@ -74,14 +86,16 @@ LearnerClassifGLMBoost = R6Class("LearnerClassifGLMBoost", inherit = LearnerClas
       }
 
       ctrl = invoke(mboost::boost_control, .args = pars_boost)
-      invoke(mboost::glmboost, f, data = data, control = ctrl, .args = pars_glmboost)
+      invoke(mboost::glmboost, f, data = data, control = ctrl,
+        .args = pars_glmboost)
     },
 
     predict_internal = function(task) {
       family = self$param_set$values$family
       newdata = task$data(cols = task$feature_names)
 
-      if (self$predict_type == "prob" && (family == "AdaExp" || family == "AUC")) {
+      if (self$predict_type == "prob" &&
+        (family == "AdaExp" || family == "AUC")) {
         stopf("The selected family %s does not support probabilities", family)
       }
 

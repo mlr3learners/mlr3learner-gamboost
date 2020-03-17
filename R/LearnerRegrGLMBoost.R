@@ -4,7 +4,8 @@
 #' @format [R6::R6Class] inheriting from [mlr3::LearnerRegr].
 #'
 #' @description
-#' A [mlr3::LearnerRegr] for a regression glmboost implemented in [mboost::glmboost()] in package \CRANpkg{mboost}.
+#' A [mlr3::LearnerRegr] for a regression glmboost implemented in
+#' [mboost::glmboost()] in package \CRANpkg{mboost}.
 #'
 #' @references
 #' Peter Buhlmann and Bin Yu (2003)
@@ -18,15 +19,19 @@ LearnerRegrGLMBoost = R6Class("LearnerRegrGLMBoost", inherit = LearnerRegr,
     initialize = function() {
       ps = ParamSet$new(
         params = list(
-          ParamDbl$new(id = "offset", default = NULL, special_vals = list(NULL), tags = "train"),
+          ParamDbl$new(id = "offset", default = NULL, special_vals = list(NULL),
+            tags = "train"),
           ParamFct$new(id = "family", default = c("Gaussian"),
-                       levels = c("Gaussian", "Laplace", "Huber", "Poisson", "GammaReg", "NBinomial", "Hurdle"), tags = "train"),
+            levels = c("Gaussian", "Laplace", "Huber", "Poisson",
+              "GammaReg", "NBinomial", "Hurdle"), tags = "train"),
           ParamUty$new(id = "nuirange", default = c(0, 100), tags = "train"),
-          ParamDbl$new(id = "d", default = NULL, special_vals = list(NULL), tags = "train"),
+          ParamDbl$new(id = "d", default = NULL, special_vals = list(NULL),
+            tags = "train"),
           ParamLgl$new(id = "center", default = TRUE, tags = "train"),
           ParamInt$new(id = "mstop", default = 100, tags = "train"),
           ParamDbl$new(id = "nu", default = 0.1, tags = "train"),
-          ParamFct$new(id = "risk", default = "inbag", levels = c("inbag", "oobag", "none"), tags = "train"),
+          ParamFct$new(id = "risk", default = "inbag",
+            levels = c("inbag", "oobag", "none"), tags = "train"),
           ParamUty$new(id = "oobweights", default = NULL, tags = "train")
         )
       )
@@ -45,19 +50,25 @@ LearnerRegrGLMBoost = R6Class("LearnerRegrGLMBoost", inherit = LearnerRegr,
 
       # Set to default for switch
       if (is.null(self$param_set$values$family)) {
-        self$param_set$values = insert_named(self$param_set$values, list(family = "Gaussian"))
+        self$param_set$values = insert_named(self$param_set$values,
+          list(family = "Gaussian"))
       }
 
       pars = self$param_set$get_values(tags = "train")
-      pars_boost = pars[which(names(pars) %in% formalArgs(mboost::boost_control))]
-      pars_glmboost = pars[which(names(pars) %in% formalArgs(mboost::gamboost))]
-      pars_family = pars[which(names(pars) %in% formalArgs(getFromNamespace(pars_glmboost$family, asNamespace("mboost"))))]
+      pars_boost = pars[which(names(pars) %in%
+        formalArgs(mboost::boost_control))]
+      pars_glmboost = pars[which(names(pars) %in%
+        formalArgs(mboost::gamboost))]
+      pars_family = pars[which(names(pars) %in%
+        formalArgs(getFromNamespace(pars_glmboost$family,
+          asNamespace("mboost"))))]
 
       f = task$formula()
       data = task$data()
 
       if ("weights" %in% task$properties) {
-        pars_glmboost = insert_named(pars_glmboost, list(weights = task$weights$weight))
+        pars_glmboost = insert_named(pars_glmboost,
+          list(weights = task$weights$weight))
       }
 
       pars_glmboost$family = switch(pars$family,
@@ -71,7 +82,8 @@ LearnerRegrGLMBoost = R6Class("LearnerRegrGLMBoost", inherit = LearnerRegr,
       )
 
       ctrl = invoke(mboost::boost_control, .args = pars_boost)
-      invoke(mboost::glmboost, f, data = data, control = ctrl, .args = pars_glmboost)
+      invoke(mboost::glmboost, f, data = data, control = ctrl,
+        .args = pars_glmboost)
     },
 
     predict_internal = function(task) {
