@@ -1,11 +1,10 @@
 #' @title Boosted Generalized Linear Classification Learner
 #'
 #' @aliases mlr_learners_classif.glmboost
-#' @format [R6::R6Class] inheriting from [mlr3::LearnerClassif].
 #'
 #' @description
-#' A [mlr3::LearnerClassif] for a classification glmboost implemented in
-#' [mboost::glmboost()] in package \CRANpkg{mboost}.
+#' A [mlr3::LearnerClassif] implemented glmboost in [mboost::glmboost()] from
+#' package \CRANpkg{mboost}.
 #'
 #' @references
 #' Peter Buhlmann and Bin Yu (2003)
@@ -16,7 +15,11 @@
 #' @export
 LearnerClassifGLMBoost = R6Class("LearnerClassifGLMBoost",
   inherit = LearnerClassif,
+
   public = list(
+
+    #' @description
+    #' Create a `LearnerClassifGLMBoost` object.
     initialize = function() {
       ps = ParamSet$new(
         params = list(
@@ -48,9 +51,12 @@ LearnerClassifGLMBoost = R6Class("LearnerClassifGLMBoost",
         param_set = ps,
         properties = c("weights", "twoclass")
       )
-    },
+    }
+  ),
 
-    train_internal = function(task) {
+  private = list(
+
+    .train = function(task) {
 
       # Default family in mboost::glmboost is not useable for twoclass
       if (is.null(self$param_set$values$family)) {
@@ -90,7 +96,7 @@ LearnerClassifGLMBoost = R6Class("LearnerClassifGLMBoost",
         .args = pars_glmboost)
     },
 
-    predict_internal = function(task) {
+    .predict = function(task) {
       family = self$param_set$values$family
       newdata = task$data(cols = task$feature_names)
 

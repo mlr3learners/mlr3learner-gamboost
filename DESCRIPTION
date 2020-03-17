@@ -26,5 +26,5 @@ Suggests:
     testthat
 Encoding: UTF-8
 NeedsCompilation: no
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.0.2
+Roxygen: list(markdown = TRUE, r6 = TRUE)
+RoxygenNote: 7.1.0

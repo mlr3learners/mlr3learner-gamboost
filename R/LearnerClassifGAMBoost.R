@@ -1,10 +1,10 @@
 #' @title Boosted Generalized Additive Classification Learner
 #'
 #' @aliases mlr_learners_classif.gamboost
-#' @format [R6::R6Class] inheriting from [mlr3::LearnerClassif].
 #'
 #' @description
-#' A [mlr3::LearnerClassif] for a classification gamboost implemented in [mboost::gamboost()] in package \CRANpkg{mboost}.
+#' A [mlr3::LearnerClassif] implementing [mboost::gamboost()] from package
+#' \CRANpkg{mboost}.
 #'
 #' @references
 #' Peter Buhlmann and Bin Yu (2003)
@@ -13,22 +13,37 @@
 #' \url{https://doi.org/10.1198/016214503000125}
 #'
 #' @export
-LearnerClassifGAMBoost = R6Class("LearnerClassifGAMBoost", inherit = LearnerClassif,
+LearnerClassifGAMBoost = R6Class("LearnerClassifGAMBoost",
+  inherit = LearnerClassif,
+
   public = list(
+
+    #' @description
+    #' Create a `LearnerClassifGAMBoost` object.
     initialize = function() {
       ps = ParamSet$new(
         params = list(
-          ParamFct$new(id = "baselearner", default = "bbs", levels = c("bbs", "bols", "btree"), tags = "train"),
+          ParamFct$new(id = "baselearner", default = "bbs",
+            levels = c("bbs", "bols", "btree"), tags = "train"),
           ParamInt$new(id = "dfbase", default = 4L, tags = "train"),
-          ParamDbl$new(id = "offset", default = NULL, special_vals = list(NULL), tags = "train"),
-          ParamFct$new(id = "family", default = c("Binomial"), levels = c("Binomial", "AdaExp", "AUC"), tags = "train"),
-          ParamFct$new(id = "link", default = "logit", levels = c("logit", "probit"), tags = "train"), # Only for family = Binomial
-          ParamFct$new(id = "type", default = "adaboost", levels = c("glm", "adaboost"), tags = "train"), # Only for family = Binomial
+          ParamDbl$new(id = "offset", default = NULL,
+            special_vals = list(NULL), tags = "train"),
+          ParamFct$new(id = "family", default = c("Binomial"),
+            levels = c("Binomial", "AdaExp", "AUC"), tags = "train"),
+          ParamFct$new(id = "link", default = "logit",
+            levels = c("logit", "probit"), tags = "train"),
+          ParamFct$new(id = "type", default = "adaboost",
+            levels = c("glm", "adaboost"), tags = "train"),
           ParamInt$new(id = "mstop", default = 100, tags = "train"),
           ParamDbl$new(id = "nu", default = 0.1, tags = "train"),
-          ParamFct$new(id = "risk", default = "inbag", levels = c("inbag", "oobag", "none"), tags = "train")
+          ParamFct$new(id = "risk", default = "inbag",
+            levels = c("inbag", "oobag", "none"), tags = "train"),
+          ParamUty$new(id = "oobweights", default = NULL, tags = "train")
         )
       )
+      ps$add_dep("type", "family", CondEqual$new("Binomial"))
+      ps$add_dep("link", "family", CondEqual$new("Binomial"))
+      ps$add_dep("oobweights", "risk", CondEqual$new("oobag"))
 
       super$initialize(
         id = "classif.gamboost",
@@ -38,9 +53,12 @@ LearnerClassifGAMBoost = R6Class("LearnerClassifGAMBoost", inherit = LearnerClas
         param_set = ps,
         properties = c("weights", "twoclass")
       )
-    },
+    }
+  ),
 
-    train_internal = function(task) {
+  private = list(
+
+    .train = function(task) {
 
       # Default family in mboost::gamboost is not useable for twoclass
       if (is.null(self$param_set$values$family)) {
@@ -48,15 +66,19 @@ LearnerClassifGAMBoost = R6Class("LearnerClassifGAMBoost", inherit = LearnerClas
       }
 
       pars = self$param_set$get_values(tags = "train")
-      pars_boost = pars[which(names(pars) %in% formalArgs(mboost::boost_control))]
-      pars_gamboost = pars[which(names(pars) %in% formalArgs(mboost::gamboost))]
-      pars_binomial = pars[which(names(pars) %in% formalArgs(mboost::Binomial))]
+      pars_boost = pars[which(names(pars) %in%
+        formalArgs(mboost::boost_control))]
+      pars_gamboost = pars[which(names(pars) %in%
+        formalArgs(mboost::gamboost))]
+      pars_binomial = pars[which(names(pars) %in%
+        formalArgs(mboost::Binomial))]
 
       f = task$formula()
       data = task$data()
 
       if ("weights" %in% task$properties) {
-        pars_gamboost = insert_named(pars_gamboost, list(weights = task$weights$weight))
+        pars_gamboost = insert_named(pars_gamboost,
+          list(weights = task$weights$weight))
       }
 
       pars_gamboost$family = switch(pars_gamboost$family,
@@ -72,16 +94,19 @@ LearnerClassifGAMBoost = R6Class("LearnerClassifGAMBoost", inherit = LearnerClas
 
       ctrl = invoke(mboost::boost_control, .args = pars_boost)
 
-      withr::with_package("mboost", { # baselearner argument requires attached mboost package
-        invoke(mboost::gamboost, formula = f, data = data, control = ctrl, .args = pars_gamboost)
+      # baselearner argument requires attached mboost package
+      withr::with_package("mboost", {
+        invoke(mboost::gamboost, formula = f, data = data, control = ctrl,
+          .args = pars_gamboost)
       })
     },
 
-    predict_internal = function(task) {
+    .predict = function(task) {
       family = self$param_set$values$family
       newdata = task$data(cols = task$feature_names)
 
-      if (self$predict_type == "prob" && (family == "AdaExp" || family == "AUC")) {
+      if (self$predict_type == "prob" && (family == "AdaExp" ||
+        family == "AUC")) {
         stopf("The selected family %s does not support probabilities", family)
       }
 

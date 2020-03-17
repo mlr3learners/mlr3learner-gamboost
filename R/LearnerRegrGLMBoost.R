@@ -1,11 +1,9 @@
 #' @title Boosted Generalized Linear Regression Learner
 #'
 #' @aliases mlr_learners_regr.glmboost
-#' @format [R6::R6Class] inheriting from [mlr3::LearnerRegr].
 #'
-#' @description
-#' A [mlr3::LearnerRegr] for a regression glmboost implemented in
-#' [mboost::glmboost()] in package \CRANpkg{mboost}.
+#' @description A [mlr3::LearnerRegr] implemented `glmboost` from
+#'   [mboost::gamboost()] in package \CRANpkg{mboost}.
 #'
 #' @references
 #' Peter Buhlmann and Bin Yu (2003)
@@ -15,7 +13,11 @@
 #'
 #' @export
 LearnerRegrGLMBoost = R6Class("LearnerRegrGLMBoost", inherit = LearnerRegr,
+
   public = list(
+
+    #' @description
+    #' Create a `LearnerRegrGLMBoost` object.
     initialize = function() {
       ps = ParamSet$new(
         params = list(
@@ -35,6 +37,7 @@ LearnerRegrGLMBoost = R6Class("LearnerRegrGLMBoost", inherit = LearnerRegr,
           ParamUty$new(id = "oobweights", default = NULL, tags = "train")
         )
       )
+      ps$add_dep("oobweights", "risk", CondEqual$new("oobag"))
 
       super$initialize(
         id = "regr.glmboost",
@@ -44,9 +47,12 @@ LearnerRegrGLMBoost = R6Class("LearnerRegrGLMBoost", inherit = LearnerRegr,
         param_set = ps,
         properties = c("weights")
       )
-    },
+    }
+  ),
 
-    train_internal = function(task) {
+  private = list(
+
+    .train = function(task) {
 
       # Set to default for switch
       if (is.null(self$param_set$values$family)) {
@@ -86,7 +92,7 @@ LearnerRegrGLMBoost = R6Class("LearnerRegrGLMBoost", inherit = LearnerRegr,
         .args = pars_glmboost)
     },
 
-    predict_internal = function(task) {
+    .predict = function(task) {
       newdata = task$data(cols = task$feature_names)
 
       p = invoke(predict, self$model, newdata = newdata, type = "response")

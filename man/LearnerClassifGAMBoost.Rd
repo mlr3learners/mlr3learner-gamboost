@@ -4,9 +4,9 @@
 \alias{LearnerClassifGAMBoost}
 \alias{mlr_learners_classif.gamboost}
 \title{Boosted Generalized Additive Classification Learner}
-\format{\link[R6:R6Class]{R6::R6Class} inheriting from \link[mlr3:LearnerClassif]{mlr3::LearnerClassif}.}
 \description{
-A \link[mlr3:LearnerClassif]{mlr3::LearnerClassif} for a classification gamboost implemented in \code{\link[mboost:gamboost]{mboost::gamboost()}} in package \CRANpkg{mboost}.
+A \link[mlr3:LearnerClassif]{mlr3::LearnerClassif} implementing \code{\link[mboost:gamboost]{mboost::gamboost()}} from package
+\CRANpkg{mboost}.
 }
 \references{
 Peter Buhlmann and Bin Yu (2003)
@@ -21,8 +21,6 @@ Journal of the American Statistical Association
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-new}{\code{LearnerClassifGAMBoost$new()}}
-\item \href{#method-train_internal}{\code{LearnerClassifGAMBoost$train_internal()}}
-\item \href{#method-predict_internal}{\code{LearnerClassifGAMBoost$predict_internal()}}
 \item \href{#method-clone}{\code{LearnerClassifGAMBoost$clone()}}
 }
 }
@@ -41,30 +39,17 @@ Journal of the American Statistical Association
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
+Create a \code{LearnerClassifGAMBoost} object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{LearnerClassifGAMBoost$new()}\if{html}{\out{</div>}}
 }
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-train_internal"></a>}}
-\subsection{Method \code{train_internal()}}{
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{LearnerClassifGAMBoost$train_internal(task)}\if{html}{\out{</div>}}
-}
-
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-predict_internal"></a>}}
-\subsection{Method \code{predict_internal()}}{
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{LearnerClassifGAMBoost$predict_internal(task)}\if{html}{\out{</div>}}
-}
-
-}
-\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{
