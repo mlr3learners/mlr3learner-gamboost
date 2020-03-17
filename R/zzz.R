@@ -13,4 +13,6 @@
   # add the learner to the dictionary
   x$add("classif.gamboost", LearnerClassifGAMBoost)
   x$add("regr.gamboost", LearnerRegrGAMBoost)
+  x$add("classif.glmboost", LearnerClassifGLMBoost)
+  x$add("regr.glmboost", LearnerRegrGLMBoost)
 } # nocov end

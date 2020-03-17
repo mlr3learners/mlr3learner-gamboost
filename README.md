@@ -1,5 +1,7 @@
 # mlr3learners.mboost
 
+This package adds `gamboost` and `glmboost` from the `mboost` package to `mlr3`.
+
 <!-- badges: start -->
 [![Build Status](https://img.shields.io/travis/mlr3learners/mlr3learners.mboost/master?label=Linux&logo=travis&style=flat-square)](https://travis-ci.org/mlr3learners/mlr3)
 [![Build status](https://ci.appveyor.com/api/projects/status/pj6oqym9ga99s83s?svg=true)](https://ci.appveyor.com/project/mlr3learners/mlr3learners-mboost)
