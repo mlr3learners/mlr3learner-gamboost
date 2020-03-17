@@ -35,7 +35,7 @@ jobs:
       CCACHE_NOHASHDIR: true
       CCACHE_SLOPPINESS: include_file_ctime
       # make sure to run `tic::use_ghactions_deploy()` to set up deployment
-      TIC_DEPLOY_KEY: ${{ secrets.TIC_DEPLOY_KEY }}
+      id_rsa: ${{ secrets.id_rsa }}
       # prevent rgl issues because no X11 display is available
       RGL_USE_NULL: true
 
