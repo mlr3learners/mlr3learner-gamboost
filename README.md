@@ -1,7 +1,5 @@
 # mlr3learners.mboost
 
-This package adds `gamboost` and `glmboost` from the `mboost` package to `mlr3`.
-
 <!-- badges: start -->
 [![R CMD Check via {tic}](https://img.shields.io/github/workflow/status/mlr3learners/mlr3learners.mboost/R%20CMD%20Check%20via%20%7Btic%7D?logo=github&label=R%20CMD%20Check%20via%20{tic}&style=flat-square)](https://github.com/mlr3learners/mlr3learners.mboost/actions)
 [![codecov](https://codecov.io/gh/mlr3learners/mlr3learners.mboost/branch/master/graph/badge.svg)](https://codecov.io/gh/mlr3learners/mlr3learners.mboost)
