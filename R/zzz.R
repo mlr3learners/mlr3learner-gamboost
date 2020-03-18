@@ -24,7 +24,6 @@ register_mlr3 = function(libname, pkgname) {
 }
 
 .onUnload = function(libpath) {
-  # nocov start
   event = packageEvent("mlr3", "onLoad")
   hooks = getHook(event)
   pkgname = vapply(hooks, function(x) environment(x)$pkgname, NA_character_)
