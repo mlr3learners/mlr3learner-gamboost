@@ -1,11 +1,16 @@
 Package: mlr3learners.mboost
 Title: gamboost learner from mboost package for 'mlr3'
-Version: 0.2.0.9000
+Version: 0.2.1
 Authors@R:
-    person(given = "Marc",
-           family = "Becker",
-           role = "cre",
-           email = "marcbecker@posteo.de")
+    c(person(given = "Marc",
+             family = "Becker",
+             role = c("aut", "cre"),
+             email = "marcbecker@posteo.de"),
+      person(given = "Patrick",
+             family = "Schratz",
+             role = "aut",
+             email = "patrick.schratz@gmail.com",
+             comment = c(ORCID = "0000-0003-0748-6624")))
 Description: gamboost learner from mboost package for
     mlr3.
 License: LGPL-3
