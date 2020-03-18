@@ -145,12 +145,12 @@ jobs:
           path: check
 
       - name: "[Stage] Before Deploy"
-        if : matrix.config.r != 'devel'
+        if: matrix.config.r != 'devel'
         run: |
           Rscript -e "tic::before_deploy()"
 
       - name: "[Stage] Deploy"
-        if : matrix.config.r != 'devel'
+        if: matrix.config.r != 'devel'
         run: Rscript -e "tic::deploy()"
 
       - name: "[Stage] After Deploy"
