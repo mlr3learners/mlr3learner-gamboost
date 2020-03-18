@@ -1,6 +1,6 @@
 #' @title Boosted Generalized Linear Classification Learner
 #'
-#' @aliases mlr_learners_classif.glmboost
+#' @name mlr_learners_classif.glmboost
 #'
 #' @description
 #' A [mlr3::LearnerClassif] implemented glmboost in [mboost::glmboost()] from
@@ -49,7 +49,8 @@ LearnerClassifGLMBoost = R6Class("LearnerClassifGLMBoost",
         feature_types = c("integer", "numeric", "factor", "ordered"),
         predict_types = c("response", "prob"),
         param_set = ps,
-        properties = c("weights", "twoclass")
+        properties = c("weights", "twoclass"),
+        man = "mlr3learners.mboost::mlr_learners_classif.glmboost"
       )
     }
   ),

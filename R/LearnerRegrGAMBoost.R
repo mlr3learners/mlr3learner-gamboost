@@ -1,6 +1,6 @@
 #' @title Boosted Generalized Additive Regression Learner
 #'
-#' @aliases mlr_learners_regr.gamboost
+#' @name mlr_learners_regr.gamboost
 #'
 #' @description A [mlr3::LearnerRegr] implemented `gamboost` from
 #'   [mboost::gamboost()] in package \CRANpkg{mboost}.
@@ -47,7 +47,8 @@ LearnerRegrGAMBoost = R6Class("LearnerRegrGAMBoost", inherit = LearnerRegr,
         feature_types = c("integer", "numeric", "factor", "ordered"),
         predict_types = c("response"),
         param_set = ps,
-        properties = c("weights")
+        properties = c("weights"),
+        man = "mlr3learners.mboost::mlr_learners_regr.gamboost"
       )
     }
   ),

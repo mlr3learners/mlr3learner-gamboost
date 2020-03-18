@@ -1,6 +1,6 @@
 #' @title Boosted Generalized Additive Classification Learner
 #'
-#' @aliases mlr_learners_classif.gamboost
+#' @name mlr_learners_classif.gamboost
 #'
 #' @description
 #' A [mlr3::LearnerClassif] implementing [mboost::gamboost()] from package
@@ -51,7 +51,8 @@ LearnerClassifGAMBoost = R6Class("LearnerClassifGAMBoost",
         feature_types = c("integer", "numeric", "factor", "ordered"),
         predict_types = c("response", "prob"),
         param_set = ps,
-        properties = c("weights", "twoclass")
+        properties = c("weights", "twoclass"),
+        man = "mlr3learners.mboost::mlr_learners_classif.gamboost"
       )
     }
   ),

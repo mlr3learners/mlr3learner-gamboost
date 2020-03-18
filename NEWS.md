@@ -1,6 +1,6 @@
 # mlr3learners.mboost 0.2.0.9000
 
-- Internal changes only.
+- Use `$help()` method from super class
 
 
 # mlr3learners.mboost 0.2.0
