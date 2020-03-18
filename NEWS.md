@@ -1,9 +1,4 @@
-# mlr3learners.mboost 0.2.1.9000
-
-- Internal changes only.
-
-
-# mlr3learners.mboost 0.2.0.9000
+# mlr3learners.mboost 0.2.2
 
 - Use `$help()` method from super class
 - Optimize .onLoad() and add .Unload()
