@@ -18,7 +18,7 @@ register_mlr3 = function(libname, pkgname) {
 }
 
 .onLoad = function(libname, pkgname) {
-  register_mlr3extratrees()
+  register_mlr3()
   setHook(packageEvent("mlr3", "onLoad"), function(...) register_mlr3(),
     action = "append")
 }
@@ -28,7 +28,7 @@ register_mlr3 = function(libname, pkgname) {
   event = packageEvent("mlr3", "onLoad")
   hooks = getHook(event)
   pkgname = vapply(hooks, function(x) environment(x)$pkgname, NA_character_)
-  setHook(event, hooks[pkgname != "mlr3learners.extratrees"],
+  setHook(event, hooks[pkgname != "mlr3learners.mboost"],
     action = "replace")
 }
 # nocov end
