@@ -6,7 +6,7 @@
 [![StackOverflow](https://img.shields.io/badge/stackoverflow-mlr3-orange.svg)](https://stackoverflow.com/questions/tagged/mlr3)
 <!-- badges: end -->
 
-Adds `gamboost()` and `glmboost()` from the `{mboost}` package to `{mlr3}`.
+Adds `gamboost()` and `glmboost()` from the {mboost} package to {mlr3}.
 
 Install the latest release of the package via 
 
@@ -14,9 +14,9 @@ Install the latest release of the package via
 install.packages("mlr3learners.mboost")
 ```
 
-by following the instructions in the [mlr3learners.drat](https://github.com/mlr3learners/mlr3learners.drat) README.
+by following the instructions in the [mlr3learners.drat README](https://github.com/mlr3learners/mlr3learners.drat).
 
-Alternatively, you can install the latest version of `mlr3learners.mboost` from Github with:
+Alternatively, you can install the latest version of {mlr3learners.mboost} from Github with:
 
 ```r
 remotes::install_github("mlr3learners/mlr3learners.mboost")
