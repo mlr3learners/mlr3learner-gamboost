@@ -26,8 +26,10 @@ Imports:
     withr
 Suggests:
     checkmate,
+    bibtex,
     testthat
 Encoding: UTF-8
 NeedsCompilation: no
 Roxygen: list(markdown = TRUE, r6 = TRUE)
 RoxygenNote: 7.1.0
+RdMacros: mlr3misc

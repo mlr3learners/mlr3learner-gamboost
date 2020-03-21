@@ -7,10 +7,8 @@
 #' package \CRANpkg{mboost}.
 #'
 #' @references
-#' Peter Buhlmann and Bin Yu (2003)
-#' Boosting with the L2 Loss: Regression and Classification
-#' Journal of the American Statistical Association
-#' \url{https://doi.org/10.1198/016214503000125}
+#' \cite{mlr3learners.mboost}{buhlmann_2003}
+#'
 #'
 #' @export
 LearnerClassifGLMBoost = R6Class("LearnerClassifGLMBoost",
