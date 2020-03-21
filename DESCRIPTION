@@ -1,5 +1,5 @@
 Package: mlr3learners.mboost
-Title: gamboost learner from mboost package for 'mlr3'
+Title: Learners from mboost package for mlr3
 Version: 0.2.2.9000
 Authors@R:
     c(person(given = "Marc",
@@ -11,8 +11,7 @@ Authors@R:
              role = "aut",
              email = "patrick.schratz@gmail.com",
              comment = c(ORCID = "0000-0003-0748-6624")))
-Description: gamboost learner from mboost package for
-    mlr3.
+Description: Adds `gamboost()` and `glmboost()` from the mboost package to mlr3.
 License: LGPL-3
 URL: https://github.com/mlr3learners/mlr3learners.mboost
 Depends:

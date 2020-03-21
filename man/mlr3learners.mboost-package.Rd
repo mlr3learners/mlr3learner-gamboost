@@ -4,10 +4,9 @@
 \name{mlr3learners.mboost-package}
 \alias{mlr3learners.mboost}
 \alias{mlr3learners.mboost-package}
-\title{mlr3learners.mboost: gamboost learner from mboost package for 'mlr3'}
+\title{mlr3learners.mboost: Learners from mboost package for mlr3}
 \description{
-gamboost learner from mboost package for
-    mlr3.
+Adds `gamboost()` and `glmboost()` from the mboost package to mlr3.
 }
 \seealso{
 Useful links:
