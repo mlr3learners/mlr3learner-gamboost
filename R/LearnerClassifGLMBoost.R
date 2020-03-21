@@ -3,14 +3,18 @@
 #' @name mlr_learners_classif.glmboost
 #'
 #' @description
-#' A [mlr3::LearnerClassif] implemented glmboost in [mboost::glmboost()] from
-#' package \CRANpkg{mboost}.
+#' Boosted generalized linear classification learner.
+#' Calls [mboost::glmboost()] from package \CRANpkg{mboost}.
+#'
+#' @templateVar id classif.glmboost
+#' @template section_dictionary_learner
 #'
 #' @references
 #' \cite{mlr3learners.mboost}{buhlmann_2003}
 #'
-#'
 #' @export
+#' @template seealso_learner
+#' @template example
 LearnerClassifGLMBoost = R6Class("LearnerClassifGLMBoost",
   inherit = LearnerClassif,
 

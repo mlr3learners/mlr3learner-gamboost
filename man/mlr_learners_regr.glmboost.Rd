@@ -5,11 +5,30 @@
 \alias{LearnerRegrGLMBoost}
 \title{Boosted Generalized Linear Regression Learner}
 \description{
-A \link[mlr3:LearnerRegr]{mlr3::LearnerRegr} implemented \code{glmboost} from
-\code{\link[mboost:gamboost]{mboost::gamboost()}} in package \CRANpkg{mboost}.
+Boosted generalized linear regression learner.
+Calls \code{\link[mboost:glmboost]{mboost::glmboost()}} from package \CRANpkg{mboost}.
+}
+\section{Dictionary}{
+
+This \link{Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link{mlr_learners} or with the associated sugar function \code{\link[=lrn]{lrn()}}:\preformatted{mlr_learners$get("regr.glmboost")
+lrn("regr.glmboost")
+}
+}
+
+\examples{
+if (requireNamespace("mboost")) {
+  learner = mlr3::lrn("regr.glmboost")
+  print(learner)
+
+  # available parameters:
+  learner$param_set$ids()
+}
 }
 \references{
 \cite{mlr3learners.mboost}{buhlmann_2003}
+}
+\seealso{
+\link[mlr3misc:Dictionary]{Dictionary} of \link[mlr3:Learner]{Learners}: \link[mlr3:mlr_learners]{mlr3::mlr_learners}
 }
 \section{Super classes}{
 \code{\link[mlr3:Learner]{mlr3::Learner}} -> \code{\link[mlr3:LearnerRegr]{mlr3::LearnerRegr}} -> \code{LearnerRegrGLMBoost}

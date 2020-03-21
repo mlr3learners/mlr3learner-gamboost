@@ -2,13 +2,19 @@
 #'
 #' @name mlr_learners_regr.gamboost
 #'
-#' @description A [mlr3::LearnerRegr] implemented `gamboost` from
-#'   [mboost::gamboost()] in package \CRANpkg{mboost}.
+#' @description
+#' Boosted generalized additive regression learner.
+#' Calls [mboost::gamboost()] from package \CRANpkg{mboost}.
+#'
+#' @templateVar id regr.gamboost
+#' @template section_dictionary_learner
 #'
 #' @references
 #' \cite{mlr3learners.mboost}{buhlmann_2003}
 #'
 #' @export
+#' @template seealso_learner
+#' @template example
 LearnerRegrGAMBoost = R6Class("LearnerRegrGAMBoost", inherit = LearnerRegr,
 
   public = list(
