@@ -17,7 +17,6 @@
 #' @template example
 LearnerClassifGAMBoost = R6Class("LearnerClassifGAMBoost",
   inherit = LearnerClassif,
-
   public = list(
 
     #' @description
