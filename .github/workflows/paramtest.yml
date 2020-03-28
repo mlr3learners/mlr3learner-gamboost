@@ -6,7 +6,7 @@ on:
     # * is a special character in YAML so you have to quote this string
     - cron: "0 4 * * *"
 
-name: R CMD Check via {tic}
+name: Paramter test
 
 jobs:
   R-CMD-check:
@@ -42,15 +42,6 @@ jobs:
         with:
           r-version: ${{ matrix.config.r }}
           Ncpus: 4
-
-      # LaTeX. Installation time:
-      # Linux: ~ 1 min
-      # macOS: ~ 1 min 30s
-      # Windows: never finishes
-      - uses: r-lib/actions/setup-tinytex@v1
-        if: runner.os != 'Windows'
-
-      - uses: r-lib/actions/setup-pandoc@master
 
       # set date/week for use in cache creation
       # https://github.community/t5/GitHub-Actions/How-to-set-and-access-a-Workflow-variable/m-p/42970
