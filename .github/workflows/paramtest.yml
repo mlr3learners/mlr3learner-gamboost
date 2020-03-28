@@ -93,7 +93,11 @@ jobs:
       - name: "[Stage] Script"
         run: Rscript -e 'tic::script()'
 
-      - name: "[Stage] Parameter test"
+      - name: "[Stage] test_1"
         run: Rscript -e "list.files(.libPaths())"
+
+      - name: "[Stage] test_2"
         run: Rscript -e "system.file('paramtest', package = 'mlr3learners.mboost')"
+
+      - name: "[Stage] Parameter test"
         run: Rscript -e "testthat::test_dir(system.file('paramtest', package = 'mlr3learners.mboost'))"
