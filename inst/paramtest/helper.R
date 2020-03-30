@@ -1,12 +1,3 @@
-run_paramtest = function(learner, fun, exclude = "...") {
-  par_learner = c(learner$param_set$ids(), exclude)
-  par_package = formalArgs(fun)
-
-  missing = par_package[!par_package %in% par_learner]
-
-  if(length(missing) > 0) {
-    run = list(ok = FALSE, missing = missing)
-    return(run)
-  }
-  return(TRUE)
-}
+library(mlr3)
+lapply(list.files(system.file("testthat", package = "mlr3"),
+  pattern = "helper_autotest", full.names = TRUE), source)

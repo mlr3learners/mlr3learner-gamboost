@@ -1,15 +1,11 @@
-library(mlr3)
 library(mlr3learners.mboost)
-source(list.files(system.file("paramtest", package = "mlr3learners.mboost"),
-  pattern = "^helper.*\\.[rR]", full.names = TRUE))
 
-test_that("classif.glmboost", {
-  learner = lrn("classif.glmboost")
-  fun = mboost:::glmboost.formula
+test_that("classif.gamboost", {
+  learner = lrn("classif.gamboost")
+  fun = mboost::gamboost
   exclude = c(
     "formula", # .train
     "data", # .train
-    "contrasts.arg", # ?
     "na.action", # Only na.omit and na.fail available
     "weights", # .train
     "control", # mboost::boost_control
@@ -21,8 +17,8 @@ test_that("classif.glmboost", {
     paste0(result$missing, collapse = "\n")))
 })
 
-test_that("classif.glmboost_boost_control", {
-  learner = lrn("classif.glmboost")
+test_that("classif.gamboost_boost_control", {
+  learner = lrn("classif.gamboost")
   fun = mboost::boost_control
   exclude = c(
     "stopintern", # ?
