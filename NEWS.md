@@ -1,7 +1,17 @@
+# mlr3learners.mboost 0.3.0
+
+- added ParamTest for internal checking against upstream paramters
+
+## New parameters
+
+- `na.action`
+- `stopinsert`
+- `trace`
+- `contrasts.arg` (only regr learners)
+
 # mlr3learners.mboost 0.2.2.9000
 
 - Internal changes only.
-
 
 # mlr3learners.mboost 0.2.2
 
@@ -19,7 +29,6 @@
 # mlr3learners.mboost 0.1.0.9000
 
 - Internal changes only.
-
 
 # mlr3learners.mboost 0.1.0.9000
 

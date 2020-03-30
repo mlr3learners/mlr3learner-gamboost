@@ -1,6 +1,6 @@
 Package: mlr3learners.mboost
 Title: Learners from mboost package for mlr3
-Version: 0.2.2.9000
+Version: 0.3.0
 Authors@R:
     c(person(given = "Marc",
              family = "Becker",
