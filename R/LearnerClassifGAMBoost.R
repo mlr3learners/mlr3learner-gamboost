@@ -39,7 +39,10 @@ LearnerClassifGAMBoost = R6Class("LearnerClassifGAMBoost",
           ParamDbl$new(id = "nu", default = 0.1, tags = "train"),
           ParamFct$new(id = "risk", default = "inbag",
             levels = c("inbag", "oobag", "none"), tags = "train"),
-          ParamUty$new(id = "oobweights", default = NULL, tags = "train")
+          ParamUty$new(id = "oobweights", default = NULL, tags = "train"),
+          ParamLgl$new(id = "trace", default = FALSE, tags = "train"),
+          ParamUty$new(id = "stopintern", default = FALSE, tags = "train"),
+          ParamUty$new(id = "na.action", default = na.omit, tags = "train")
         )
       )
       ps$add_dep("type", "family", CondEqual$new("Binomial"))
@@ -84,7 +87,7 @@ LearnerClassifGAMBoost = R6Class("LearnerClassifGAMBoost",
       }
 
       pars_gamboost$family = switch(pars_gamboost$family,
-        Binomial = invoke(mboost::Binomial, .args = pars_binomial),
+        Binomial = mlr3misc::invoke(mboost::Binomial, .args = pars_binomial),
         AdaExp = mboost::AdaExp(),
         AUC = mboost::AUC())
 
@@ -94,12 +97,12 @@ LearnerClassifGAMBoost = R6Class("LearnerClassifGAMBoost",
         data[[task$target_names]] = factor(data[[task$target_names]], levs)
       }
 
-      ctrl = invoke(mboost::boost_control, .args = pars_boost)
+      ctrl = mlr3misc::invoke(mboost::boost_control, .args = pars_boost)
 
       # baselearner argument requires attached mboost package
       withr::with_package("mboost", {
-        invoke(mboost::gamboost, formula = f, data = data, control = ctrl,
-          .args = pars_gamboost)
+        mlr3misc::invoke(mboost::gamboost, formula = f, data = data,
+          control = ctrl, .args = pars_gamboost)
       })
     },
 
@@ -116,7 +119,8 @@ LearnerClassifGAMBoost = R6Class("LearnerClassifGAMBoost",
         p = invoke(predict, self$model, newdata = newdata, type = "class")
         PredictionClassif$new(task = task, response = p)
       } else {
-        p = invoke(predict, self$model, newdata = newdata, type = "response")
+        p = mlr3misc::invoke(predict, self$model, newdata = newdata,
+          type = "response")
         p = matrix(c(p, 1 - p), ncol = 2L, nrow = length(p))
         colnames(p) = task$class_names
         PredictionClassif$new(task = task, prob = p)
