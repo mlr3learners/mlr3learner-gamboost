@@ -62,8 +62,8 @@ jobs:
         uses: pat-s/always-upload-cache@v1.1.4
         with:
           path: ${{ env.R_LIBS_USER }}
-          key: ${{ runner.os }}-r-${{ matrix.config.r }}-${{steps.date.outputs.date}}
-          restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-${{steps.date.outputs.date}}
+          key: ${{ runner.os }}-r-${{ matrix.config.r }}-${{steps.date.outputs.date}}-1
+          restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-${{steps.date.outputs.date}}-1
 
       - name: "[Cache] Cache ccache"
         if: runner.os != 'Windows'
@@ -91,4 +91,6 @@ jobs:
         run: Rscript -e "remotes::install_github('ropensci/tic')" -e "print(tic::dsl_load())" -e "tic::prepare_all_stages()" -e "tic::before_install()" -e "tic::install()"
 
       - name: "[Stage] Parameter test"
-        run: Rscript -e "testthat::test_dir(system.file('paramtest', package = 'mlr3learners.mboost')))"
+        run: |
+          R CMD INSTALL .
+          Rscript -e "testthat::test_dir(system.file('paramtest', package = 'mlr3learners.mboost'))"
