@@ -37,7 +37,11 @@ LearnerClassifGLMBoost = R6Class("LearnerClassifGLMBoost",
           ParamDbl$new(id = "nu", default = 0.1, tags = "train"),
           ParamFct$new(id = "risk", default = "inbag",
             levels = c("inbag", "oobag", "none"), tags = "train"),
-          ParamUty$new(id = "oobweights", default = NULL, tags = "train")
+          ParamUty$new(id = "oobweights", default = NULL, tags = "train"),
+          ParamLgl$new(id = "trace", default = FALSE, tags = "train"),
+          ParamUty$new(id = "stopintern", default = FALSE, tags = "train"),
+          ParamUty$new(id = "na.action", default = na.omit, tags = "train"),
+          ParamUty$new(id = "contrasts.arg", tags = "train")
         )
       )
       ps$add_dep("link", "family", CondEqual$new("Binomial"))

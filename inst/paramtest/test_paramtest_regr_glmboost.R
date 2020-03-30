@@ -1,8 +1,8 @@
 library(mlr3learners.mboost)
 
-test_that("classif.gamboost", {
-  learner = lrn("classif.gamboost")
-  fun = mboost::gamboost
+test_that("regr.glmboost", {
+  learner = lrn("regr.glmboost")
+  fun = mboost:::glmboost.formula
   exclude = c(
     "formula", # handled via mlr3
     "data", # handled via mlr3
@@ -16,8 +16,8 @@ test_that("classif.gamboost", {
     paste0(result$missing, collapse = "\n")))
 })
 
-test_that("classif.gamboost_boost_control", {
-  learner = lrn("classif.gamboost")
+test_that("regr.glmboost_boost_control", {
+  learner = lrn("regr.glmboost")
   fun = mboost::boost_control
   exclude = c(
     "center" # deprecated

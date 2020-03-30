@@ -4,13 +4,11 @@ test_that("classif.glmboost", {
   learner = lrn("classif.glmboost")
   fun = mboost:::glmboost.formula
   exclude = c(
-    "formula", # .train
-    "data", # .train
-    "contrasts.arg", # ?
-    "na.action", # Only na.omit and na.fail available
-    "weights", # .train
-    "control", # mboost::boost_control
-    "..."
+    "formula", # handled via mlr3
+    "data", # handled via mlr3
+    "weights", # handled via mlr3
+    "control", # handed to mboost::boost_control
+    "..." # not used
   )
 
   result = run_paramtest(learner, fun, exclude)
@@ -22,10 +20,7 @@ test_that("classif.glmboost_boost_control", {
   learner = lrn("classif.glmboost")
   fun = mboost::boost_control
   exclude = c(
-    "stopintern", # ?
-    "center", # deprecated
-    "trace", # ?
-    "..."
+    "center" # deprecated
   )
 
   result = run_paramtest(learner, fun, exclude)
