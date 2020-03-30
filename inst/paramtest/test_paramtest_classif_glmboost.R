@@ -7,7 +7,7 @@ test_that("classif.glmboost", {
     "formula", # handled via mlr3
     "data", # handled via mlr3
     "weights", # handled via mlr3
-    #"control", # handled to mboost::boost_control
+    "control", # handled to mboost::boost_control
     "..." # not used
   )
 
