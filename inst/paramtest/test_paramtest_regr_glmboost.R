@@ -7,13 +7,13 @@ test_that("regr.glmboost", {
     "formula", # handled via mlr3
     "data", # handled via mlr3
     "weights", # handled via mlr3
-    "control", # handed to mboost::boost_control
+    "control", # handled to mboost::boost_control
     "..." # not used
   )
 
-  result = run_paramtest(learner, fun, exclude)
-  expect_true(result, info = paste0("Missing parameters:\n",
-    paste0(result$missing, collapse = "\n")))
+  ParamTest = run_paramtest(learner, fun, exclude)
+  expect_true(ParamTest, info = paste0("\nMissing parameters:\n",
+    paste0("- '", result$missing,"'", collapse = "\n")))
 })
 
 test_that("regr.glmboost_boost_control", {
@@ -23,7 +23,7 @@ test_that("regr.glmboost_boost_control", {
     "center" # deprecated
   )
 
-  result = run_paramtest(learner, fun, exclude)
-  expect_true(result, info = paste0("Missing parameters:\n",
-    paste0(result$missing, collapse = "\n")))
+  ParamTest = run_paramtest(learner, fun, exclude)
+  expect_true(ParamTest, info = paste0("\nMissing parameters:\n",
+    paste0("- '", result$missing,"'", collapse = "\n")))
 })
