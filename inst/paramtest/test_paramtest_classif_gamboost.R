@@ -13,7 +13,7 @@ test_that("classif.gamboost", {
 
   ParamTest = run_paramtest(learner, fun, exclude)
   expect_true(ParamTest, info = paste0("\nMissing parameters:\n",
-    paste0("- '", ParamTestresult$missing,"'", collapse = "\n")))
+    paste0("- '", ParamTest$missing,"'", collapse = "\n")))
 })
 
 test_that("classif.gamboost_boost_control", {
