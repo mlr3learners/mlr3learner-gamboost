@@ -15,7 +15,8 @@
 #' @export
 #' @template seealso_learner
 #' @template example
-LearnerRegrGAMBoost = R6Class("LearnerRegrGAMBoost", inherit = LearnerRegr,
+LearnerRegrGAMBoost = R6Class("LearnerRegrGAMBoost",
+  inherit = LearnerRegr,
   public = list(
 
     #' @description
@@ -23,20 +24,26 @@ LearnerRegrGAMBoost = R6Class("LearnerRegrGAMBoost", inherit = LearnerRegr,
     initialize = function() {
       ps = ParamSet$new(
         params = list(
-          ParamFct$new(id = "baselearner", default = "bbs",
+          ParamFct$new(
+            id = "baselearner", default = "bbs",
             levels = c("bbs", "bols", "btree"), tags = "train"),
           ParamInt$new(id = "dfbase", default = 4L, tags = "train"),
-          ParamDbl$new(id = "offset", default = NULL, special_vals = list(NULL),
+          ParamDbl$new(
+            id = "offset", default = NULL, special_vals = list(NULL),
             tags = "train"),
-          ParamFct$new(id = "family", default = c("Gaussian"),
-            levels = c("Gaussian", "Laplace", "Huber", "Poisson", "GammaReg",
+          ParamFct$new(
+            id = "family", default = c("Gaussian"),
+            levels = c(
+              "Gaussian", "Laplace", "Huber", "Poisson", "GammaReg",
               "NBinomial", "Hurdle"), tags = "train"),
           ParamUty$new(id = "nuirange", default = c(0, 100), tags = "train"),
-          ParamDbl$new(id = "d", default = NULL, special_vals = list(NULL),
+          ParamDbl$new(
+            id = "d", default = NULL, special_vals = list(NULL),
             tags = "train"),
           ParamInt$new(id = "mstop", default = 100, tags = "train"),
           ParamDbl$new(id = "nu", default = 0.1, tags = "train"),
-          ParamFct$new(id = "risk", default = "inbag",
+          ParamFct$new(
+            id = "risk", default = "inbag",
             levels = c("inbag", "oobag", "none"), tags = "train"),
           ParamUty$new(id = "oobweights", default = NULL, tags = "train"),
           ParamLgl$new(id = "trace", default = FALSE, tags = "train"),
@@ -59,7 +66,6 @@ LearnerRegrGAMBoost = R6Class("LearnerRegrGAMBoost", inherit = LearnerRegr,
   ),
 
   private = list(
-
     .train = function(task) {
 
       # Set to default for switch
@@ -73,14 +79,16 @@ LearnerRegrGAMBoost = R6Class("LearnerRegrGAMBoost", inherit = LearnerRegr,
       pars_gamboost = pars[which(names(pars) %in%
         formalArgs(mboost::gamboost))]
       pars_family = pars[which(names(pars) %in%
-        formalArgs(getFromNamespace(pars_gamboost$family,
+        formalArgs(getFromNamespace(
+          pars_gamboost$family,
           asNamespace("mboost"))))]
 
       f = task$formula()
       data = task$data()
 
       if ("weights" %in% task$properties) {
-        pars_gamboost = insert_named(pars_gamboost,
+        pars_gamboost = insert_named(
+          pars_gamboost,
           list(weights = task$weights$weight))
       }
 
@@ -96,7 +104,8 @@ LearnerRegrGAMBoost = R6Class("LearnerRegrGAMBoost", inherit = LearnerRegr,
 
       ctrl = invoke(mboost::boost_control, .args = pars_boost)
       withr::with_package("mboost", { # baselearner argument requires attached mboost package
-        invoke(mboost::gamboost, formula = f, data = data, control = ctrl,
+        invoke(mboost::gamboost,
+          formula = f, data = data, control = ctrl,
           .args = pars_gamboost)
       })
     },

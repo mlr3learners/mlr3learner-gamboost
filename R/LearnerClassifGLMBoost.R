@@ -24,18 +24,23 @@ LearnerClassifGLMBoost = R6Class("LearnerClassifGLMBoost",
     initialize = function() {
       ps = ParamSet$new(
         params = list(
-          ParamDbl$new(id = "offset", default = NULL, special_vals = list(NULL),
+          ParamDbl$new(
+            id = "offset", default = NULL, special_vals = list(NULL),
             tags = "train"),
-          ParamFct$new(id = "family", default = c("Binomial"),
+          ParamFct$new(
+            id = "family", default = c("Binomial"),
             levels = c("Binomial", "AdaExp", "AUC"), tags = "train"),
-          ParamFct$new(id = "link", default = "logit",
+          ParamFct$new(
+            id = "link", default = "logit",
             levels = c("logit", "probit"), tags = "train"),
-          ParamFct$new(id = "type", default = "adaboost",
+          ParamFct$new(
+            id = "type", default = "adaboost",
             levels = c("glm", "adaboost"), tags = "train"),
           ParamLgl$new(id = "center", default = TRUE, tags = "train"),
           ParamInt$new(id = "mstop", default = 100, tags = "train"),
           ParamDbl$new(id = "nu", default = 0.1, tags = "train"),
-          ParamFct$new(id = "risk", default = "inbag",
+          ParamFct$new(
+            id = "risk", default = "inbag",
             levels = c("inbag", "oobag", "none"), tags = "train"),
           ParamUty$new(id = "oobweights", default = NULL, tags = "train"),
           ParamLgl$new(id = "trace", default = FALSE, tags = "train"),
@@ -61,12 +66,12 @@ LearnerClassifGLMBoost = R6Class("LearnerClassifGLMBoost",
   ),
 
   private = list(
-
     .train = function(task) {
 
       # Default family in mboost::glmboost is not useable for twoclass
       if (is.null(self$param_set$values$family)) {
-        self$param_set$values = insert_named(self$param_set$values,
+        self$param_set$values = insert_named(
+          self$param_set$values,
           list(family = "Binomial"))
       }
 
@@ -82,7 +87,8 @@ LearnerClassifGLMBoost = R6Class("LearnerClassifGLMBoost",
       data = task$data()
 
       if ("weights" %in% task$properties) {
-        pars_glmboost = insert_named(pars_glmboost,
+        pars_glmboost = insert_named(
+          pars_glmboost,
           list(weights = task$weights$weight))
       }
 
@@ -98,7 +104,8 @@ LearnerClassifGLMBoost = R6Class("LearnerClassifGLMBoost",
       }
 
       ctrl = invoke(mboost::boost_control, .args = pars_boost)
-      invoke(mboost::glmboost, f, data = data, control = ctrl,
+      invoke(mboost::glmboost, f,
+        data = data, control = ctrl,
         .args = pars_glmboost)
     },
 

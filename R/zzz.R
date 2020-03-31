@@ -17,13 +17,13 @@ register_mlr3 = function(libname, pkgname) {
   x$add("regr.glmboost", LearnerRegrGLMBoost)
 }
 
-.onLoad = function(libname, pkgname) {
+.onLoad = function(libname, pkgname) { # nolint
   register_mlr3()
   setHook(packageEvent("mlr3", "onLoad"), function(...) register_mlr3(),
     action = "append")
 }
 
-.onUnload = function(libpath) {
+.onUnload = function(libpath) { # nolint
   event = packageEvent("mlr3", "onLoad")
   hooks = getHook(event)
   pkgname = vapply(hooks, function(x) environment(x)$pkgname, NA_character_)

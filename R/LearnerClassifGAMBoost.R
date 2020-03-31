@@ -24,20 +24,26 @@ LearnerClassifGAMBoost = R6Class("LearnerClassifGAMBoost",
     initialize = function() {
       ps = ParamSet$new(
         params = list(
-          ParamFct$new(id = "baselearner", default = "bbs",
+          ParamFct$new(
+            id = "baselearner", default = "bbs",
             levels = c("bbs", "bols", "btree"), tags = "train"),
           ParamInt$new(id = "dfbase", default = 4L, tags = "train"),
-          ParamDbl$new(id = "offset", default = NULL,
+          ParamDbl$new(
+            id = "offset", default = NULL,
             special_vals = list(NULL), tags = "train"),
-          ParamFct$new(id = "family", default = c("Binomial"),
+          ParamFct$new(
+            id = "family", default = c("Binomial"),
             levels = c("Binomial", "AdaExp", "AUC"), tags = "train"),
-          ParamFct$new(id = "link", default = "logit",
+          ParamFct$new(
+            id = "link", default = "logit",
             levels = c("logit", "probit"), tags = "train"),
-          ParamFct$new(id = "type", default = "adaboost",
+          ParamFct$new(
+            id = "type", default = "adaboost",
             levels = c("glm", "adaboost"), tags = "train"),
           ParamInt$new(id = "mstop", default = 100, tags = "train"),
           ParamDbl$new(id = "nu", default = 0.1, tags = "train"),
-          ParamFct$new(id = "risk", default = "inbag",
+          ParamFct$new(
+            id = "risk", default = "inbag",
             levels = c("inbag", "oobag", "none"), tags = "train"),
           ParamUty$new(id = "oobweights", default = NULL, tags = "train"),
           ParamLgl$new(id = "trace", default = FALSE, tags = "train"),
@@ -62,7 +68,6 @@ LearnerClassifGAMBoost = R6Class("LearnerClassifGAMBoost",
   ),
 
   private = list(
-
     .train = function(task) {
 
       # Default family in mboost::gamboost is not useable for twoclass
@@ -82,7 +87,8 @@ LearnerClassifGAMBoost = R6Class("LearnerClassifGAMBoost",
       data = task$data()
 
       if ("weights" %in% task$properties) {
-        pars_gamboost = insert_named(pars_gamboost,
+        pars_gamboost = insert_named(
+          pars_gamboost,
           list(weights = task$weights$weight))
       }
 
@@ -101,7 +107,8 @@ LearnerClassifGAMBoost = R6Class("LearnerClassifGAMBoost",
 
       # baselearner argument requires attached mboost package
       withr::with_package("mboost", {
-        mlr3misc::invoke(mboost::gamboost, formula = f, data = data,
+        mlr3misc::invoke(mboost::gamboost,
+          formula = f, data = data,
           control = ctrl, .args = pars_gamboost)
       })
     },
@@ -119,7 +126,8 @@ LearnerClassifGAMBoost = R6Class("LearnerClassifGAMBoost",
         p = invoke(predict, self$model, newdata = newdata, type = "class")
         PredictionClassif$new(task = task, response = p)
       } else {
-        p = mlr3misc::invoke(predict, self$model, newdata = newdata,
+        p = mlr3misc::invoke(predict, self$model,
+          newdata = newdata,
           type = "response")
         p = matrix(c(p, 1 - p), ncol = 2L, nrow = length(p))
         colnames(p) = task$class_names

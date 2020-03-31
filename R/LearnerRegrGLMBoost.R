@@ -15,7 +15,8 @@
 #' @export
 #' @template seealso_learner
 #' @template example
-LearnerRegrGLMBoost = R6Class("LearnerRegrGLMBoost", inherit = LearnerRegr,
+LearnerRegrGLMBoost = R6Class("LearnerRegrGLMBoost",
+  inherit = LearnerRegr,
   public = list(
 
     #' @description
@@ -23,18 +24,23 @@ LearnerRegrGLMBoost = R6Class("LearnerRegrGLMBoost", inherit = LearnerRegr,
     initialize = function() {
       ps = ParamSet$new(
         params = list(
-          ParamDbl$new(id = "offset", default = NULL, special_vals = list(NULL),
+          ParamDbl$new(
+            id = "offset", default = NULL, special_vals = list(NULL),
             tags = "train"),
-          ParamFct$new(id = "family", default = c("Gaussian"),
-            levels = c("Gaussian", "Laplace", "Huber", "Poisson",
+          ParamFct$new(
+            id = "family", default = c("Gaussian"),
+            levels = c(
+              "Gaussian", "Laplace", "Huber", "Poisson",
               "GammaReg", "NBinomial", "Hurdle"), tags = "train"),
           ParamUty$new(id = "nuirange", default = c(0, 100), tags = "train"),
-          ParamDbl$new(id = "d", default = NULL, special_vals = list(NULL),
+          ParamDbl$new(
+            id = "d", default = NULL, special_vals = list(NULL),
             tags = "train"),
           ParamLgl$new(id = "center", default = TRUE, tags = "train"),
           ParamInt$new(id = "mstop", default = 100, tags = "train"),
           ParamDbl$new(id = "nu", default = 0.1, tags = "train"),
-          ParamFct$new(id = "risk", default = "inbag",
+          ParamFct$new(
+            id = "risk", default = "inbag",
             levels = c("inbag", "oobag", "none"), tags = "train"),
           ParamUty$new(id = "oobweights", default = NULL, tags = "train"),
           ParamLgl$new(id = "trace", default = FALSE, tags = "train"),
@@ -58,12 +64,12 @@ LearnerRegrGLMBoost = R6Class("LearnerRegrGLMBoost", inherit = LearnerRegr,
   ),
 
   private = list(
-
     .train = function(task) {
 
       # Set to default for switch
       if (is.null(self$param_set$values$family)) {
-        self$param_set$values = insert_named(self$param_set$values,
+        self$param_set$values = insert_named(
+          self$param_set$values,
           list(family = "Gaussian"))
       }
 
@@ -73,14 +79,16 @@ LearnerRegrGLMBoost = R6Class("LearnerRegrGLMBoost", inherit = LearnerRegr,
       pars_glmboost = pars[which(names(pars) %in%
         formalArgs(mboost::gamboost))]
       pars_family = pars[which(names(pars) %in%
-        formalArgs(getFromNamespace(pars_glmboost$family,
+        formalArgs(getFromNamespace(
+          pars_glmboost$family,
           asNamespace("mboost"))))]
 
       f = task$formula()
       data = task$data()
 
       if ("weights" %in% task$properties) {
-        pars_glmboost = insert_named(pars_glmboost,
+        pars_glmboost = insert_named(
+          pars_glmboost,
           list(weights = task$weights$weight))
       }
 
@@ -95,7 +103,8 @@ LearnerRegrGLMBoost = R6Class("LearnerRegrGLMBoost", inherit = LearnerRegr,
       )
 
       ctrl = invoke(mboost::boost_control, .args = pars_boost)
-      invoke(mboost::glmboost, f, data = data, control = ctrl,
+      invoke(mboost::glmboost, f,
+        data = data, control = ctrl,
         .args = pars_glmboost)
     },
 
