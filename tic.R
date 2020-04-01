@@ -9,6 +9,7 @@ if (!ci_has_env("PARAMTEST")) {
     add_step(step_install_deps())
 
   get_stage("script") %>%
-    add_code_step(remotes::install_dev('mlr3')) %>%
-    add_code_step(testthat::test_dir(system.file('paramtest', package = 'mlr3learners.mboost')))
+    add_code_step(remotes::install_dev("mlr3")) %>%
+    add_code_step(testthat::test_dir(system.file("paramtest", package = "mlr3learners.mboost"),
+      stop_on_failure = TRUE))
 }
