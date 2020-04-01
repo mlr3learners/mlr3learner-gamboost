@@ -1,4 +1,5 @@
 library(mlr3learners.mboost)
+library(mlr3)
 
 test_that("classif.glmboost", {
   learner = lrn("classif.glmboost")
