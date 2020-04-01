@@ -15,6 +15,10 @@ test_that("classif.glmboost", {
   expect_true(ParamTest, info = paste0(
     "\nMissing parameters:\n",
     paste0("- '", ParamTest$missing, "'", collapse = "\n")))
+
+  if (ParamTest$ok == FALSE) {
+    cat("ERROR")
+  }
 })
 
 test_that("classif.glmboost_boost_control", {
