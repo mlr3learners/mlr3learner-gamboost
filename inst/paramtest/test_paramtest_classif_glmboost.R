@@ -6,7 +6,7 @@ test_that("classif.glmboost", {
   exclude = c(
     "formula", # handled via mlr3
     "data", # handled via mlr3
-    #"weights", # handled via mlr3
+    "weights", # handled via mlr3
     "control", # handled to mboost::boost_control
     "..." # not used
   )
