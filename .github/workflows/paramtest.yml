@@ -95,4 +95,5 @@ jobs:
       - name: "[Stage] Parameter test"
         run: |
           R CMD INSTALL .
+          Rscript -e "remotes::install_dev('mlr3')"
           Rscript -e "testthat::test_dir(system.file('paramtest', package = 'mlr3learners.mboost'))"
