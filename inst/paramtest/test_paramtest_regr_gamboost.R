@@ -1,5 +1,4 @@
 library(mlr3learners.mboost)
-library(mlr3)
 
 test_that("regr.gamboost", {
   learner = lrn("regr.gamboost")
