@@ -18,15 +18,21 @@ Depends:
     R (>= 3.1.0)
 Imports:
     data.table,
-    mlr3,
+    mlr3 (>= 0.3.0),
     mlr3misc,
+    mlr3proba (>= 0.1.6),
     paradox,
     R6,
+    survival,
     mboost,
     withr
 Suggests:
     checkmate,
     bibtex,
+    mvtnorm,
+    partykit,
+    pracma,
+    simsurv,
     testthat
 Encoding: UTF-8
 NeedsCompilation: no

@@ -1,8 +1,10 @@
 #' @import data.table
 #' @import paradox
 #' @import mlr3misc
+#' @import survival
 #' @importFrom R6 R6Class
 #' @importFrom mlr3 mlr_learners LearnerClassif LearnerRegr
+#' @importFrom mlr3proba LearnerSurv
 "_PACKAGE"
 
 # nocov start
@@ -13,8 +15,12 @@ register_mlr3 = function(libname, pkgname) {
   # add the learner to the dictionary
   x$add("classif.gamboost", LearnerClassifGAMBoost)
   x$add("regr.gamboost", LearnerRegrGAMBoost)
+  x$add("surv.gamboost", LearnerSurvGAMBoost)
   x$add("classif.glmboost", LearnerClassifGLMBoost)
   x$add("regr.glmboost", LearnerRegrGLMBoost)
+  x$add("surv.glmboost", LearnerSurvGLMBoost)
+  x$add("surv.blackboost", LearnerSurvBlackBoost)
+  x$add("surv.mboost", LearnerSurvMBoost)
 }
 
 .onLoad = function(libname, pkgname) { # nolint
