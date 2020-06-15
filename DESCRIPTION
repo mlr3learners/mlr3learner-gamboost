@@ -11,31 +11,33 @@ Authors@R:
              role = "aut",
              email = "patrick.schratz@gmail.com",
              comment = c(ORCID = "0000-0003-0748-6624")))
-Description: Adds `gamboost()` and `glmboost()` from the mboost package to mlr3.
+Description: Adds `gamboost()` and `glmboost()` from the mboost
+    package to mlr3.
 License: LGPL-3
 URL: https://github.com/mlr3learners/mlr3learners.mboost
 Depends:
     R (>= 3.1.0)
 Imports:
     data.table,
+    mboost,
     mlr3 (>= 0.3.0),
     mlr3misc,
     mlr3proba (>= 0.1.6),
     paradox,
     R6,
     survival,
-    mboost,
     withr
 Suggests:
-    checkmate,
     bibtex,
+    checkmate,
     mvtnorm,
     partykit,
     pracma,
     simsurv,
     testthat
+RdMacros: 
+    mlr3misc
 Encoding: UTF-8
 NeedsCompilation: no
 Roxygen: list(markdown = TRUE, r6 = TRUE)
 RoxygenNote: 7.1.0
-RdMacros: mlr3misc
