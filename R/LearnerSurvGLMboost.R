@@ -138,7 +138,7 @@ LearnerSurvGLMBoost = R6Class("LearnerSurvGLMBoost",
 
       # predict linear predictor
       lp = as.numeric(mlr3misc::invoke(predict, self$model,
-                                       newdata = newdata, type = "link"))
+        newdata = newdata, type = "link"))
 
       # predict survival
       surv = mlr3misc::invoke(mboost::survFit, self$model, newdata = newdata)
@@ -157,13 +157,13 @@ LearnerSurvGLMBoost = R6Class("LearnerSurvGLMBoost",
       response = NULL
       if (!is.null(self$param_set$values$family)) {
         if (self$param_set$values$family
-            %in% c("weibull", "loglog", "lognormal", "gehan")) {
+          %in% c("weibull", "loglog", "lognormal", "gehan")) {
           response = exp(lp)
         }
       }
 
       mlr3proba::PredictionSurv$new(task = task, crank = lp, distr = distr,
-                                    lp = lp, response = response)
+        lp = lp, response = response)
     }
   )
 )

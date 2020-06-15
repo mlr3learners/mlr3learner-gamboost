@@ -8,7 +8,7 @@
 [![StackOverflow](https://img.shields.io/badge/stackoverflow-mlr3-orange.svg)](https://stackoverflow.com/questions/tagged/mlr3)
 <!-- badges: end -->
 
-Adds `gamboost()`, `glmboost()`, `blackboost()` from the {mboost} package to {mlr3}.
+Adds `gamboost()`, `glmboost()` and `blackboost()` from the {mboost} package to {mlr3}.
 
 Install the latest release of the package via
 

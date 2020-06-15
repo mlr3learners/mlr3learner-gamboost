@@ -68,8 +68,8 @@ LearnerSurvGAMBoost = R6Class("LearnerSurvGAMBoost",
     },
 
     #' @description
-    #' The importance scores are extracted with the function [mboost::varimp()] with the
-    #' default arguments.
+    #' The importance scores are extracted with the function [mboost::varimp()]
+    #' with the default arguments.
     #' @return Named `numeric()`.
     importance = function() {
       if (is.null(self$model)) {
@@ -83,7 +83,8 @@ LearnerSurvGAMBoost = R6Class("LearnerSurvGAMBoost",
     },
 
     #' @description
-    #' Selected features are extracted with the function [mboost::variable.names.mboost()], with
+    #' Selected features are extracted with the function
+    #' [mboost::variable.names.mboost()], with
     #' `used.only = TRUE`.
     #' @return `character()`.
     selected_features = function() {
@@ -149,7 +150,8 @@ LearnerSurvGAMBoost = R6Class("LearnerSurvGAMBoost",
 
       newdata = task$data(cols = task$feature_names)
       # predict linear predictor
-      lp = as.numeric(mlr3misc::invoke(predict, self$model, newdata = newdata, type = "link"))
+      lp = as.numeric(mlr3misc::invoke(predict, self$model, newdata = newdata,
+        type = "link"))
 
       # predict survival
       surv = mlr3misc::invoke(mboost::survFit, self$model, newdata = newdata)
@@ -172,8 +174,8 @@ LearnerSurvGAMBoost = R6Class("LearnerSurvGAMBoost",
         }
       }
 
-      mlr3proba::PredictionSurv$new(task = task, crank = lp, distr = distr, lp = lp,
-                                    response = response)
+      mlr3proba::PredictionSurv$new(task = task, crank = lp, distr = distr,
+        lp = lp, response = response)
     }
   )
 )

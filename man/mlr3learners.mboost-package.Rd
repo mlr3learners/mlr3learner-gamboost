@@ -6,7 +6,8 @@
 \alias{mlr3learners.mboost-package}
 \title{mlr3learners.mboost: Learners from mboost package for mlr3}
 \description{
-Adds `gamboost()` and `glmboost()` from the mboost package to mlr3.
+Adds gamboost()`, `glmboost()` and `blackboost()` from the mboost
+    package to mlr3.
 }
 \seealso{
 Useful links:
