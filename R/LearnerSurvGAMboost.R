@@ -30,9 +30,9 @@ LearnerSurvGAMBoost = R6Class("LearnerSurvGAMBoost",
             id = "family", default = "coxph",
             levels = c(
               "coxph", "weibull", "loglog", "lognormal", "gehan", "cindex",
-              "custom"), tags = c("train", "family")),
-          ParamUty$new(id = "custom.family", tags = c("train", "family")),
-          ParamUty$new(id = "nuirange", default = c(0, 100), tags = c("train", "aft")),
+              "custom"), tags = c("train")),
+          ParamUty$new(id = "custom.family", tags = c("train")),
+          ParamUty$new(id = "nuirange", default = c(0, 100), tags = c("train")),
           ParamUty$new(id = "offset", tags = "train"),
           ParamLgl$new(id = "center", default = TRUE, tags = "train"),
           ParamInt$new(id = "mstop", default = 100L, lower = 0L, tags = "train"),
@@ -47,8 +47,8 @@ LearnerSurvGAMBoost = R6Class("LearnerSurvGAMBoost",
           ParamInt$new(id = "dfbase", default = 4, lower = 0, tags = "train"),
           ParamDbl$new(
             id = "sigma", default = 0.1, lower = 0, upper = 1,
-            tags = c("train", "cindex")),
-          ParamUty$new(id = "ipcw", default = 1, tags = c("train", "cindex")),
+            tags = c("train")),
+          ParamUty$new(id = "ipcw", default = 1, tags = c("train")),
           ParamUty$new(id = "na.action", default = na.omit, tags = "train")
         )
       )
@@ -122,21 +122,21 @@ LearnerSurvGAMBoost = R6Class("LearnerSurvGAMBoost",
       family = switch(pars$family,
         coxph = mboost::CoxPH(),
         weibull = mlr3misc::invoke(mboost::Weibull,
-          .args = self$param_set$get_values(tags = "aft")),
+          .args = pars[names(pars) %in% formalArgs(mboost::Weibull)]),
         loglog = mlr3misc::invoke(mboost::Loglog,
-          .args = self$param_set$get_values(tags = "aft")),
+          .args = pars[names(pars) %in% formalArgs(mboost::Loglog)]),
         lognormal = mlr3misc::invoke(mboost::Lognormal,
-          .args = self$param_set$get_values(tags = "aft")),
+          .args = pars[names(pars) %in% formalArgs(mboost::Lognormal)]),
         gehan = mboost::Gehan(),
         cindex = mlr3misc::invoke(mboost::Cindex,
-          .args = self$param_set$get_values(tags = "cindex")),
+          .args = pars[names(pars) %in% formalArgs(mboost::Cindex)]),
         custom = pars$custom.family
       )
 
       # FIXME - until issue closes
-      pars = pars[!(pars %in% self$param_set$get_values(tags = c("aft")))]
-      pars = pars[!(pars %in% self$param_set$get_values(tags = c("cindex")))]
-      pars = pars[!(pars %in% self$param_set$get_values(tags = c("family")))]
+      pars = pars[!(names(pars) %in% formalArgs(mboost::Weibull))]
+      pars = pars[!(names(pars) %in% formalArgs(mboost::Cindex))]
+      pars = pars[!(names(pars) %in% c("family", "custom.family"))]
 
 
       with_package("mboost", {
@@ -150,7 +150,8 @@ LearnerSurvGAMBoost = R6Class("LearnerSurvGAMBoost",
 
       newdata = task$data(cols = task$feature_names)
       # predict linear predictor
-      lp = as.numeric(mlr3misc::invoke(predict, self$model, newdata = newdata,
+      lp = as.numeric(mlr3misc::invoke(predict, self$model,
+        newdata = newdata,
         type = "link"))
 
       # predict survival
@@ -174,7 +175,8 @@ LearnerSurvGAMBoost = R6Class("LearnerSurvGAMBoost",
         }
       }
 
-      mlr3proba::PredictionSurv$new(task = task, crank = lp, distr = distr,
+      mlr3proba::PredictionSurv$new(
+        task = task, crank = lp, distr = distr,
         lp = lp, response = response)
     }
   )
