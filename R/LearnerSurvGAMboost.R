@@ -30,9 +30,9 @@ LearnerSurvGAMBoost = R6Class("LearnerSurvGAMBoost",
             id = "family", default = "coxph",
             levels = c(
               "coxph", "weibull", "loglog", "lognormal", "gehan", "cindex",
-              "custom"), tags = c("train")),
-          ParamUty$new(id = "custom.family", tags = c("train")),
-          ParamUty$new(id = "nuirange", default = c(0, 100), tags = c("train")),
+              "custom"), tags = "train"),
+          ParamUty$new(id = "custom.family", tags = "train"),
+          ParamUty$new(id = "nuirange", default = c(0, 100), tags = "train"),
           ParamUty$new(id = "offset", tags = "train"),
           ParamLgl$new(id = "center", default = TRUE, tags = "train"),
           ParamInt$new(id = "mstop", default = 100L, lower = 0L, tags = "train"),
@@ -47,8 +47,8 @@ LearnerSurvGAMBoost = R6Class("LearnerSurvGAMBoost",
           ParamInt$new(id = "dfbase", default = 4, lower = 0, tags = "train"),
           ParamDbl$new(
             id = "sigma", default = 0.1, lower = 0, upper = 1,
-            tags = c("train")),
-          ParamUty$new(id = "ipcw", default = 1, tags = c("train")),
+            tags = "train"),
+          ParamUty$new(id = "ipcw", default = 1, tags = "train"),
           ParamUty$new(id = "na.action", default = na.omit, tags = "train")
         )
       )
@@ -139,7 +139,7 @@ LearnerSurvGAMBoost = R6Class("LearnerSurvGAMBoost",
       pars = pars[!(names(pars) %in% c("family", "custom.family"))]
 
 
-      with_package("mboost", {
+      mlr3misc::with_package("mboost", {
         mlr3misc::invoke(mboost::gamboost,
           formula = task$formula(task$feature_names),
           data = task$data(), family = family, .args = pars)

@@ -33,9 +33,9 @@ LearnerSurvGLMBoost = R6Class("LearnerSurvGLMBoost",
             id = "family", default = "coxph",
             levels = c(
               "coxph", "weibull", "loglog", "lognormal", "gehan", "cindex",
-              "custom"), tags = c("train")),
-          ParamUty$new(id = "custom.family", tags = c("train")),
-          ParamUty$new(id = "nuirange", default = c(0, 100), tags = c("train")),
+              "custom"), tags = "train"),
+          ParamUty$new(id = "custom.family", tags = "train"),
+          ParamUty$new(id = "nuirange", default = c(0, 100), tags = "train"),
           ParamLgl$new(id = "center", default = TRUE, tags = "train"),
           ParamInt$new(id = "mstop", default = 100L, lower = 0L, tags = "train"),
           ParamDbl$new(id = "nu", default = 0.1, lower = 0, upper = 1, tags = "train"),
@@ -45,8 +45,8 @@ LearnerSurvGLMBoost = R6Class("LearnerSurvGLMBoost",
           ParamLgl$new(id = "trace", default = FALSE, tags = "train"),
           ParamDbl$new(
             id = "sigma", default = 0.1, lower = 0, upper = 1,
-            tags = c("train")),
-          ParamUty$new(id = "ipcw", default = 1, tags = c("train")),
+            tags = "train"),
+          ParamUty$new(id = "ipcw", default = 1, tags = "train"),
           ParamUty$new(id = "na.action", default = na.omit, tags = "train"),
           ParamUty$new(id = "contrasts.arg", tags = "train")
         )
