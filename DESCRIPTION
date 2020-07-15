@@ -5,12 +5,18 @@ Authors@R:
     c(person(given = "Marc",
              family = "Becker",
              role = c("aut", "cre"),
-             email = "marcbecker@posteo.de"),
+             email = "marcbecker@posteo.de",
+             comment = c(ORCID = "0000-0002-8115-0400")),
       person(given = "Patrick",
              family = "Schratz",
              role = "aut",
              email = "patrick.schratz@gmail.com",
-             comment = c(ORCID = "0000-0003-0748-6624")))
+             comment = c(ORCID = "0000-0003-0748-6624")),
+      person(given = "Raphael",
+             family = "Sonabend",
+             role = "aut",
+             email = "raphael.sonabend.15@ucl.ac.uk",
+             comment = c(ORCID = "0000-0001-9225-4654")))
 Description: Adds gamboost()`, `glmboost()` and `blackboost()` from the mboost
     package to mlr3.
 License: LGPL-3
@@ -40,4 +46,4 @@ RdMacros:
 Encoding: UTF-8
 NeedsCompilation: no
 Roxygen: list(markdown = TRUE, r6 = TRUE)
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
