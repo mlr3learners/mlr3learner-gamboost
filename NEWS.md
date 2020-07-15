@@ -1,7 +1,10 @@
+# mlr3learners.mboost 0.4
+
+- Add `LearnerSurvBlackboost`, `LearnerSurvGAMboost` and `LearnerSurvGLMboost`
+
 # mlr3learners.mboost 0.3.0.9000
 
 - Internal changes only.
-
 
 # mlr3learners.mboost 0.3.0
 
