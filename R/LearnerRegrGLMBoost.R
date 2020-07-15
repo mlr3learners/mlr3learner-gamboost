@@ -57,7 +57,7 @@ LearnerRegrGLMBoost = R6Class("LearnerRegrGLMBoost",
         feature_types = c("integer", "numeric", "factor", "ordered"),
         predict_types = c("response"),
         param_set = ps,
-        properties = c("weights"),
+        properties = "weights",
         man = "mlr3learners.mboost::mlr_learners_regr.glmboost"
       )
     }

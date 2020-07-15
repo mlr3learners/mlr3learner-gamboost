@@ -6,7 +6,8 @@
 \alias{mlr3learners.mboost-package}
 \title{mlr3learners.mboost: Learners from mboost package for mlr3}
 \description{
-Adds `gamboost()` and `glmboost()` from the mboost package to mlr3.
+Adds gamboost()`, `glmboost()` and `blackboost()` from the mboost
+    package to mlr3.
 }
 \seealso{
 Useful links:
@@ -16,11 +17,12 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Marc Becker \email{marcbecker@posteo.de}
+\strong{Maintainer}: Marc Becker \email{marcbecker@posteo.de} (\href{https://orcid.org/0000-0002-8115-0400}{ORCID})
 
 Authors:
 \itemize{
   \item Patrick Schratz \email{patrick.schratz@gmail.com} (\href{https://orcid.org/0000-0003-0748-6624}{ORCID})
+  \item Raphael Sonabend \email{raphael.sonabend.15@ucl.ac.uk} (\href{https://orcid.org/0000-0001-9225-4654}{ORCID})
 }
 
 }
