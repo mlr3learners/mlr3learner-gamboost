@@ -62,7 +62,7 @@ LearnerSurvGLMBoost = R6Class("LearnerSurvGLMBoost",
         param_set = ps,
         feature_types = c("integer", "numeric", "factor", "logical"),
         predict_types = c("distr", "crank", "lp", "response"),
-        properties = c("weights"),
+        properties = "weights",
         packages = "mboost"
       )
     }
