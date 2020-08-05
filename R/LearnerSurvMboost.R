@@ -151,7 +151,7 @@ LearnerSurvMBoost = R6Class("LearnerSurvMBoost",
       surv$cdf = 1 - surv$surv
 
       # define WeightedDiscrete distr6 object from predicted survival function
-      x = rep(list(data = data.frame(x = surv$time, cdf = 0)), task$nrow)
+      x = rep(list(list(x = surv$time, cdf = 0)), task$nrow)
       for (i in 1:task$nrow) {
         x[[i]]$cdf = surv$cdf[, i]
       }
